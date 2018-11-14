@@ -1,0 +1,29 @@
+#profileImg {
+  width: 175px;
+  height: 175px;
+  display: block;
+  margin: auto;
+}
+
+#imgProj {
+  width: 300px;
+  height: 300px;
+}
+
+
+input[type="file"] {
+  visibility: hidden;
+}
+
+#btnEditProfilePicture {
+  float: right;
+}
+
+.image-preview {
+  height: 5rem;
+  margin: 1rem 0;
+}
+
+.image-preview img {
+  height: 100%;
+}

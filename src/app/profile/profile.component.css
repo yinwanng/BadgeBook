@@ -3,6 +3,7 @@
   height: 175px;
   display: block;
   margin: auto;
+  border-radius: 50%;
 }
 
 #imgProj {

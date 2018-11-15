@@ -10,7 +10,62 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body>
+<body onload="hideList()">
   <app-root></app-root>
+  <script>
+    var array = ['Adele','Agnes','Billy','Bob','Calvin','Christina','Cindy','mapReduce'];
+
+    function hideList(){
+      document.getElementById("myUL").style.display="none";
+      let renderlist =  document.getElementById("searchResultList");
+      let thelist = document.getElementById("myUL");
+      renderlist.appendChild(thelist);
+
+
+        for(let k=0;k<array.length;k++){
+            var newItem = document.createElement("li");
+            var a = document.createElement("a");
+            a.textContent = array[k];
+            a.setAttribute('href', "http://www.bcit.ca");
+            newItem.appendChild(a);
+            thelist.appendChild(newItem);
+      }
+
+    }
+
+    function myFunction() {
+      // Declare variables
+      var input, filter, ul, li, a, i;
+      input = document.getElementById('myInput');
+      filter = input.value.toUpperCase();
+      ul = document.getElementById("myUL");
+      li = ul.getElementsByTagName('li');
+
+      // Loop through all list items, and hide those who don't match the search query
+      for (i = 0; i < li.length; i++) {
+
+          a = li[i].getElementsByTagName("a")[0];
+          if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            document.getElementById("myUL").style.display="";
+              li[i].style.display = "";
+          } else {
+              li[i].style.display = "none";
+          }
+      }
+    }
+
+    document.addEventListener("click",(evt)=>{
+        let list = document.getElementById("myUL");
+        let target = evt.target;
+
+        do{
+            if(target==list){
+                return;
+            }
+            target = target.parentNode;
+        }while(target);
+        document.getElementById("myUL").style.display="none";
+    });
+  </script>
 </body>
 </html>

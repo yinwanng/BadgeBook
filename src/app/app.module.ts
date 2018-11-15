@@ -12,13 +12,15 @@ import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileComponent } from './profile/profile.component';
 import { BadgesComponent } from './badges/badges.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ProfileComponent,
-    BadgesComponent
+    BadgesComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

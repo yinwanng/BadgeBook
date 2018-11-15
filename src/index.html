@@ -34,7 +34,7 @@
   var DatabasePtr = firebase.database().ref();
   let UserNameList = [];
   let UserKeyList = [];
-
+  let DescList = [];
 
 
 
@@ -70,17 +70,10 @@
       filter = input.value.toUpperCase();
       console.log("filter string = " + filter);
 
-      let FirstArg = '';
-      let SecondARg = '';
+      let Args = '';
 
-      // Making sure its larger than one string,
-      for(i = 0; i < filter.length; ++i)
-      {
-        // TODO : guard for first and last char for space
-        
-      }
-
-
+      Args = filter.split(" ");
+      console.log(Args);
       ul = document.getElementById("myUL");
       li = ul.getElementsByTagName('li');
 
@@ -88,10 +81,21 @@
       for (i = 0; i < li.length; i++) {
 
           a = li[i].getElementsByTagName("a")[0];
-          if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          if (a.innerHTML.toUpperCase().indexOf(Args[0]) > -1) {
             document.getElementById("myUL").style.display="";
               li[i].style.display = "";
-          } else {
+          } 
+          // else if (Args.length > 1)
+          // { 
+
+          //   for(i = 0; i < DescList.length; ++i)
+          //     if(DescList[i].toUpperCase().indexOf(Args[1]))
+          //     {
+          //       document.getElementById("myUL").style.display="";
+          //       li[i].style.display = "";
+          //     }
+          // }
+          else {
               li[i].style.display = "none";
           }
       }
@@ -120,8 +124,6 @@
       // Because of async issue, we need to fetch table first before doing anything.
       GetUserList();
     }
-
-
   
 function GetUserList()
 {
@@ -130,12 +132,18 @@ function GetUserList()
         // JS is stupid, some reason it cannot parse two elements in a child....
         snapshot.forEach(function(child){ UserNameList.push(child.key)}); 
         snapshot.forEach(function(child){ UserKeyList.push(child.val())});
-
         //console.log(UserNameList);  
 
-        hideList();
+        // Really Hacky way off getting the Description array rather than iterating it through the JSON, done this because of FireBase Async Issue
+        // This is nested in another ref to make sure this is queued first.
+        firebase.database().ref("/User").once("value", function(snapshot){snapshot.forEach(function(child){ DescList.push(child.val().Desc)}) });
+        //console.log(DescList);
+
+        hideList();     // After we load everything then hide the page
     }); 
+
 }
+
 function GetUserInfo(uid)
 {
     firebase.database().ref("/User/" + uid).once("value", function(snapshot) {

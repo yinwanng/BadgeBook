@@ -5,39 +5,82 @@
   <title>Badgebook</title>
   <base href="/">
 
+  <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+ 
+
 </head>
-<body onload="hideList()">
+<body onload="InitWebPage()">
   <app-root></app-root>
+
   <script>
-    var array = ['Adele','Agnes','Billy','Bob','Calvin','Christina','Cindy','mapReduce'];
+
+  // =========================================================================================================================
+  // Search Bar ==============================================================================================================
+  var config = {
+    apiKey: "AIzaSyC44VsrNgTJkuK1OB_tWBiHB2zF80fXrgg",
+    authDomain: "webdev-d6815.firebaseapp.com",
+    databaseURL: "https://webdev-d6815.firebaseio.com",
+    projectId: "webdev-d6815",
+  };
+  firebase.initializeApp(config);
+
+
+  var DatabasePtr = firebase.database().ref();
+  let UserNameList = [];
+  let UserKeyList = [];
+
+
+
+
+    var array = UserNameList;//['Adele','Agnes','Billy','Bob','Calvin','Christina','Cindy','mapReduce'];
 
     function hideList(){
+
+
       document.getElementById("myUL").style.display="none";
       let renderlist =  document.getElementById("searchResultList");
       let thelist = document.getElementById("myUL");
       renderlist.appendChild(thelist);
 
 
-        for(let k=0;k<array.length;k++){
+        for(let k=0; k < array.length; k++){
             var newItem = document.createElement("li");
             var a = document.createElement("a");
             a.textContent = array[k];
-            a.setAttribute('href', "http://www.bcit.ca");
+            a.setAttribute('onclick', 'GetUserInfo("'+ UserKeyList[k]+'")');
             newItem.appendChild(a);
             thelist.appendChild(newItem);
       }
-
     }
 
+    function Test()
+    {
+      console.log("test");
+    }
     function myFunction() {
       // Declare variables
       var input, filter, ul, li, a, i;
       input = document.getElementById('myInput');
       filter = input.value.toUpperCase();
+      console.log("filter string = " + filter);
+
+      let FirstArg = '';
+      let SecondARg = '';
+
+      // Making sure its larger than one string,
+      for(i = 0; i < filter.length; ++i)
+      {
+        // TODO : guard for first and last char for space
+        
+      }
+
+
       ul = document.getElementById("myUL");
       li = ul.getElementsByTagName('li');
 
@@ -66,6 +109,70 @@
         }while(target);
         document.getElementById("myUL").style.display="none";
     });
+
+
+
+    // =========================================================================================================================
+    // Search Through DB ==============================================================================================================
+
+    function InitWebPage()
+    {
+      // Because of async issue, we need to fetch table first before doing anything.
+      GetUserList();
+    }
+
+
+  
+function GetUserList()
+{
+    firebase.database().ref("/UserList").once("value").then(function(snapshot) {
+
+        // JS is stupid, some reason it cannot parse two elements in a child....
+        snapshot.forEach(function(child){ UserNameList.push(child.key)}); 
+        snapshot.forEach(function(child){ UserKeyList.push(child.val())});
+
+        //console.log(UserNameList);  
+
+        hideList();
+    }); 
+}
+function GetUserInfo(uid)
+{
+    firebase.database().ref("/User/" + uid).once("value", function(snapshot) {
+        console.log("User Info");
+        console.log(snapshot.val());
+        ChangeUser(snapshot.val());
+    });
+}
+
+
+function ChangeUser(data)
+{
+  UpdateProfile(data.Name);
+
+  UpdateBadges(data);
+
+  UpdateDescription(data.Desc);
+}
+
+function UpdateBadges(data)
+{
+  // First one is Hangman, Second is Tank, Third is Java
+  document.getElementsByClassName("mat-badge-content mat-badge-active")[0].innerHTML = data.HScore;
+  document.getElementsByClassName("mat-badge-content mat-badge-active")[1].innerHTML = data.TScore;
+  document.getElementsByClassName("mat-badge-content mat-badge-active")[2].innerHTML = data.HScore;
+}
+
+function UpdateDescription(data)
+{
+  document.getElementById("profile-desc").innerHTML = data;
+}
+
+function UpdateProfile(data)
+{
+  document.getElementsByClassName("mat-card-title")[0].innerHTML = data;
+}
+
   </script>
 </body>
 </html>

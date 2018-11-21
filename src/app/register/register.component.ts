@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  tryRegister(value){
+  tryRegister(){
     console.log(
       this.username, 
       this.email,

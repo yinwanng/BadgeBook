@@ -38,6 +38,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { CoreComponent } from './core/core.component';
 import { Routes, RouterModule } from '@angular/router';
+import { LandingComponent } from './landing/landing.component';
 
 
 
@@ -70,7 +71,8 @@ const routes: Routes = [
     CoreComponent,
     LoginComponent,
     RegisterComponent,
-    UserComponent
+    UserComponent,
+    LandingComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

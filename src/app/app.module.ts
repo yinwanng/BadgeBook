@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 
-import {MatButtonModule, MatToolbarModule} from '@angular/material';
+import {MatButtonModule, MatToolbarModule, MatMenuModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileComponent } from './profile/profile.component';
 import { BadgesComponent } from './badges/badges.component';
 import { SearchComponent } from './search/search.component';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SearchComponent } from './search/search.component';
     HeaderComponent,
     ProfileComponent,
     BadgesComponent,
-    SearchComponent
+    SearchComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { SearchComponent } from './search/search.component';
     MatToolbarModule,
     MatCardModule,
     MatIconModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

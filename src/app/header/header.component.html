@@ -1,1 +1,9 @@
-<mat-toolbar color="primary">BadgeBook</mat-toolbar>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span><button mat-button color="primary">BadgeBook</button></span>
+        <span class="example-spacer"></span>
+        <mat-icon class="example-icon">favorite</mat-icon>
+        <mat-icon class="example-icon">delete</mat-icon>
+        <button mat-button (click)="logout()" color="warning">Logout</button>
+    </mat-toolbar-row>
+</mat-toolbar>

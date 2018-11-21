@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-
+import {FireService} from '../fire.service'
 @Component({
   selector: 'app-badges',
   templateUrl: './badges.component.html',
   styleUrls: ['./badges.component.css']
 })
 export class BadgesComponent implements OnInit {
+  kills:any
 
-  constructor() { }
+  constructor(private afs:FireService) { }
 
   ngOnInit() {
+    this.afs.currentkills.subscribe(a=>{
+      console.log(a)
+      this.kills=a;
+    })
   }
 
   goToHangmanGame() {

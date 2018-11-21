@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { FireService } from '../fire.service';
 
 @Component({
   selector: 'app-profile',
@@ -6,8 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  // imagePreview: string;
-  constructor() { }
+  users: Observable<any[]>;
+  UserNameList: any[];
+  UserKeyList: [];
+  DescList:[];
+  filter:any;
+  uid: any;
+  name: any;
+  description: any;
+
+  constructor(private fire: FireService) {}
 
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
@@ -15,6 +25,11 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.fire.currentuid.subscribe(uid => this.uid = uid);
+    this.fire.currentname.subscribe(name => this.name = name);
+    this.fire.currentdescription.subscribe(description => this.description = description);
   }
-
+  foo(){
+    this.fire.getClientsInfo("asaldivar18")
+  }
 }

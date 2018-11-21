@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import {FireService} from '../fire.service'
+import * as firebase from 'firebase/app';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
 
 @Component({
   selector: 'app-core',
@@ -9,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class CoreComponent implements OnInit {
 
-  constructor() {
+  constructor(public afAuth: AngularFireAuth) {
   }
   ngOnInit() {
   }

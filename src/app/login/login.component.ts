@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     window.location.href = 'register'
   }
 
-  tryLogin(value){
+  tryLogin(){
     console.log(
       this.username, 
       this.email,
@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
       console.log(res);
       this.errorMessage = "";
       this.successMessage = "Your account has been created";
+      window.location.href = ""
       
     }, err => {
       console.log(err);

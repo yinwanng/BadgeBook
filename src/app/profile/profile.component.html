@@ -1,6 +1,6 @@
 <mat-card>
 
-    <mat-card-title (click)="foo('asaldivar18')"> {{name}}</mat-card-title>
+    <mat-card-title (click)="foo()"> {{name}}</mat-card-title>
     <div>
         <button id="btnEditProfilePicture" mat-stroked-button type="button" (click)="filePicker.click()">Edit Profile Image</button>
         <input type="file" #filePicker (change)="onImagePicked($event)">

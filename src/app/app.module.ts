@@ -5,6 +5,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http'; 
+
 
 
 import {MatButtonModule, MatToolbarModule} from '@angular/material';
@@ -12,6 +14,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatInputModule} from '@angular/material/input';
+
 
 
 import { AppComponent } from './app.component';
@@ -77,6 +80,7 @@ const routes: Routes = [
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatButtonModule,
     MatToolbarModule,
     MatCardModule,

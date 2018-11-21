@@ -30,6 +30,6 @@ export class ProfileComponent implements OnInit {
     this.fire.currentdescription.subscribe(description => this.description = description);
   }
   foo(){
-    console.log(this.description)
+    this.fire.getClientsInfo("asaldivar18")
   }
 }

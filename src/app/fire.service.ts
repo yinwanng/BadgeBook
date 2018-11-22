@@ -119,7 +119,9 @@ export class FireService {
           if(!found)
           this.kills.next("0")
         })
-        this.http.post('https://comp4711-hangman-api.herokuapp.com/api/users', "",{})
+        this.http.post('https://comp4711-hangman-api.herokuapp.com/api/users', "",{}).subscribe(a=>{
+          console.log(a)
+        })
 
         
       }

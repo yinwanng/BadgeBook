@@ -32,8 +32,7 @@ export class RegisterComponent implements OnInit {
         email:this.email,
         password:this.password
       }).then(res => {
-      window.location.href = ""
-      console.log(res);
+            console.log(res);
       this.errorMessage = "";
       this.successMessage = "Your account has been created";
       

@@ -2,7 +2,9 @@
     <mat-toolbar-row>
         <span><button mat-button color="primary">BadgeBook</button></span>
         <span class="example-spacer"></span>
-        <input type="text" id="myInput" onkeyup="myFunction()" style="height: 50%;width: 30%;margin: auto" placeholder="Search for names,descriptions">
+        <!-- Which button click, should show search result and also route to result page -->
+        <input type="text" id="myInput" style="height: 50%;width: 30%;margin: auto" placeholder="Search for names,descriptions">
+        <!-- createOneCart() is in result.component.ts, fail to call here -->
         <button (click)="createOneCart()" class="btn btn-primary">Search</button>
         <mat-icon class="example-icon">favorite</mat-icon>
         <mat-icon class="example-icon">delete</mat-icon>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FireService} from '../fire.service'
+import { AngularFireAuth } from '@angular/fire/auth';
+
 
 @Component({
   selector: 'app-landing',
@@ -7,8 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private afs:FireService,             
+    private afAuth: AngularFireAuth
+   ) { }
+   
   ngOnInit() {
   }
   goLogin(){

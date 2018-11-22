@@ -4,6 +4,7 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import{CoreComponent} from './core/core.component'
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path:"index",
     component:CoreComponent
+  },
+  {
+    path:'profile',
+    component:ProfileComponent
   },
   {
     path:"",

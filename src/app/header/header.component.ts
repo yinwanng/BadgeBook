@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FireService} from '../fire.service'
+import { AngularFireAuth } from '@angular/fire/auth';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-header',
@@ -8,7 +10,10 @@ import {FireService} from '../fire.service'
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private afs:FireService) { }
+  constructor(private afs:FireService,             
+     private afAuth: AngularFireAuth,
+     private router:Router
+    ) { }
 
   ngOnInit() {
   }
@@ -16,6 +21,7 @@ export class HeaderComponent implements OnInit {
   logout(){
     console.log("foo")
     this.afs.logout();
+    this.router.navigate([''])
   }
 
 }

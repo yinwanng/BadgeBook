@@ -12,7 +12,7 @@ export class BadgesComponent implements OnInit {
 
   ngOnInit() {
     this.afs.currentkills.subscribe(a=>{
-      console.log(a)
+      //console.log(a)
       this.kills=a;
     })
   }

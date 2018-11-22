@@ -1,13 +1,14 @@
-<form class="example-form">
-    <mat-form-field class="example-full-width">
-        <input matInput placeholder="Enter Username" [(ngModel)]="username" name="username" type="text" value="">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <input matInput placeholder="Enter Email" [(ngModel)]="email" name="email" type="text" value="">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <input matInput placeholder="Enter Password" [(ngModel)]="password" name="password" type="password" value="">
-    </mat-form-field>
-    <button mat-raised-button class="example-full-width" (click)="tryRegister()" color="primary">Create Account</button>
-
-</form>
+<mat-card>
+    <form class="example-form">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Enter Username" [(ngModel)]="username" name="username" type="text" value="">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Enter Email" [(ngModel)]="email" name="email" type="text" value="">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Enter Password" [(ngModel)]="password" name="password" type="password" value="">
+        </mat-form-field>
+        <button mat-raised-button class="example-full-width" (click)="tryRegister()" color="primary">Create Account</button>
+    </form>
+</mat-card>

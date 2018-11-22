@@ -1,9 +1,17 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <span><button mat-button color="primary">BadgeBook</button></span>
+        <span><button mat-button color="white">BadgeBook</button></span>
+
+        <form ng-submit="submit()">
+          <input type="text" ng-model="text" name="text" placeholder="Search for profile"/>
+        </form>
+
         <span class="example-spacer"></span>
         <mat-icon class="example-icon">favorite</mat-icon>
         <mat-icon class="example-icon">delete</mat-icon>
         <button mat-button (click)="logout()" color="warning">Logout</button>
     </mat-toolbar-row>
 </mat-toolbar>
+
+
+

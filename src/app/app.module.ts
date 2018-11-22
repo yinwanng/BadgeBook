@@ -39,6 +39,7 @@ import { environment } from '../environments/environment';
 import { CoreComponent } from './core/core.component';
 import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
+import { SearchListComponent } from './search-list/search-list.component';
 
 
 
@@ -72,7 +73,8 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     UserComponent,
-    LandingComponent
+    LandingComponent,
+    SearchListComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

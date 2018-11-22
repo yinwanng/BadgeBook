@@ -8,6 +8,8 @@ import {FireService} from '../fire.service'
 })
 export class HeaderComponent implements OnInit {
 
+  searchData: string;
+
   constructor(private afs:FireService) { }
 
   ngOnInit() {
@@ -17,5 +19,10 @@ export class HeaderComponent implements OnInit {
     console.log("foo")
     this.afs.logout();
   }
+
+  passData() {
+
+  }
+
 
 }

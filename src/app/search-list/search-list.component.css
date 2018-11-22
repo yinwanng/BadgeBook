@@ -1,0 +1,10 @@
+.profilePic {
+  width: 100px;
+  height: 100px;
+}
+
+mat-card {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}

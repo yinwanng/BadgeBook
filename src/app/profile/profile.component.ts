@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
   uid: any;
   name: any;
   description: any;
+  subkey:any
 
   constructor(private fire: FireService) {}
 
@@ -25,11 +26,19 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fire.currentuid.subscribe(uid => this.uid = uid);
+    this.fire.getClientsInfo()
+    this.fire.currentkey.subscribe(key=> this.subkey = key);
+    this.fire.currentuid.subscribe(uid => {
+      this.uid = uid
+      
+    });
     this.fire.currentname.subscribe(name => this.name = name);
     this.fire.currentdescription.subscribe(description => this.description = description);
+    console.log(this.subkey)
+    console.log(this.uid)
+
   }
   foo(){
-    this.fire.getClientsInfo("asaldivar18")
+    //this.fire.getClientsInfo("asaldivar18")
   }
 }

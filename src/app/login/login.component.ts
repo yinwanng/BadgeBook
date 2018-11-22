@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FireService} from '../fire.service'
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-login',
@@ -13,12 +14,12 @@ export class LoginComponent implements OnInit {
   email:String
   password:String
 
-  constructor(private authService:FireService) { }
+  constructor(private authService:FireService,private router:Router) { }
 
   ngOnInit() {
   }
   foo(){
-    this.authService.getClientsInfo("asdf")
+    //this.authService.getClientsInfo("asdf")
   }
 
 
@@ -40,7 +41,7 @@ export class LoginComponent implements OnInit {
       console.log(res);
       this.errorMessage = "";
       this.successMessage = "Your account has been created";
-      window.location.href = ""
+      this.router.navigate([''])
       
     }, err => {
       console.log(err);

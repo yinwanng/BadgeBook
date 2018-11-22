@@ -11,12 +11,12 @@ import { AngularFirestore } from 'angularfire2/firestore';
   templateUrl: './result.component.html',
   styleUrls: ['./result.component.css'],
   //selector: 'app-root',
-    // template: `
+   //  template: `
     //     <ul>
     //         <li *ngFor="let item of items | async">
-    //             <pre>{{ item | json }}</pre>
+     //            <pre>{{ item | json }}</pre>
     //         </li>
-    //     </ul>
+     //    </ul>
     // `
 })
   
@@ -26,16 +26,16 @@ export class ResultComponent implements OnInit {
   public db : AngularFirestore;
   constructor() 
   {
-   //afs.collection('people', ref => ref.where('name', '==', 'jeff') )
+    //this.items = db.collection('/users').valueChanges();
   }
 
   ngOnInit() {
-    let user = this.db.doc('/users/name');
-    console.log(user);
+    //let user = this.db.doc('/users/name');
+    //console.log(user);
     this.createOneCart("user");
-    //this.createOneCart("Tim");
-    //this.createOneCart("Alan");
-    //this.createOneCart("Adiran");
+    this.createOneCart("Tim");
+    this.createOneCart("Alan");
+    this.createOneCart("Adiran");
 
   }
 

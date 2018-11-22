@@ -12,6 +12,7 @@ export class LandingComponent implements OnInit {
   private _url = `https://comp4711-a1.herokuapp.com/api`;
 
   ngOnInit() {
+
   }
   goLogin() {
     window.location.href = 'login';
@@ -28,7 +29,7 @@ export class LandingComponent implements OnInit {
   goToVideoChat() {
     let myHeaders = new Headers();
     myHeaders.append('token', 'badgebook'); 
-    this.http.post(this._url, myHeaders).subscribe(data => window.location.href = data.url);
+    this.http.post(this._url, myHeaders).subscribe( (data:any) => { window.location.href = data.url });
   }
 
 

@@ -684,6 +684,7 @@ module.exports = "<br>\r\n<br>\r\n<br>\r\n<br>\r\n\r\n<mat-card>\r\n    <mat-car
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LandingComponent", function() { return LandingComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -694,13 +695,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var LandingComponent = /** @class */ (function () {
-    function LandingComponent() {
+    function LandingComponent(http) {
+        this.http = http;
+        this._url = "https://comp4711-a1.herokuapp.com/api";
     }
     LandingComponent.prototype.ngOnInit = function () {
     };
     LandingComponent.prototype.goLogin = function () {
-        //document.getElementById("loginsect").
         window.location.href = 'login';
     };
     LandingComponent.prototype.goToHangmanGame = function () {
@@ -710,7 +713,9 @@ var LandingComponent = /** @class */ (function () {
         window.location.href = "https://comp4711-hangman.herokuapp.com/";
     };
     LandingComponent.prototype.goToVideoChat = function () {
-        window.location.href = "https://comp4711-a1.herokuapp.com/";
+        var myHeaders = new Headers();
+        myHeaders.append('token', 'badgebook');
+        this.http.post(this._url, myHeaders).subscribe(function (data) { window.location.href = data.url; });
     };
     LandingComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -718,7 +723,7 @@ var LandingComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./landing.component.html */ "./src/app/landing/landing.component.html"),
             styles: [__webpack_require__(/*! ./landing.component.css */ "./src/app/landing/landing.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], LandingComponent);
     return LandingComponent;
 }());

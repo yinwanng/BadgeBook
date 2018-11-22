@@ -16,7 +16,7 @@ export class LandingComponent implements OnInit {
 
 
   constructor(private afs:FireService,             
-    private afAuth: AngularFireAuth,
+    public afAuth: AngularFireAuth,
     private http: HttpClient
    ) { }
    

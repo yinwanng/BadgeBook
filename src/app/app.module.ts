@@ -39,6 +39,7 @@ import { environment } from '../environments/environment';
 import { CoreComponent } from './core/core.component';
 import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
+import { ResultComponent } from './result/result.component';
 
 
 
@@ -72,7 +73,8 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     UserComponent,
-    LandingComponent
+    LandingComponent,
+    ResultComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -90,8 +92,10 @@ const routes: Routes = [
     MatBadgeModule,
     FormsModule,
     NgSelectModule,
-    MatInputModule
-
+    MatInputModule,
+    RouterModule.forRoot([
+      {path:'result',component:ResultComponent}
+    ])
     
   ],
   

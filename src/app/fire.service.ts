@@ -5,6 +5,11 @@ import { HttpClient } from '@angular/common/http';
 import {UserModule} from './models/user/user.module'
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
+import {Router} from '@angular/router'
+
+import { HttpHeaders } from '@angular/common/http';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,22 +17,34 @@ import * as firebase from 'firebase/app';
 export class FireService {
 
   private usersCollection: AngularFirestoreCollection;
-  users: Observable<any[]>;
-  filter:any;
+
+  /**
+   * 
+   */
   private uid= new BehaviorSubject<string>("");
   private name= new BehaviorSubject<string>("");
   private description= new BehaviorSubject<string>("");
   private kills = new BehaviorSubject<string>("");
+  private key = new BehaviorSubject<string>("");
+  
+  users: Observable<any[]>;
   currentkills = this.kills.asObservable();
   currentuid = this.uid.asObservable();
   currentname = this.name.asObservable();
   currentdescription = this.description.asObservable();
-  key:any
+  currentkey = this.key.asObservable()
+  apptoken:string;
+  
+  filter:any;
   
 
-  constructor(private db: AngularFirestore, private afAuth: AngularFireAuth, private http:HttpClient) {
+  constructor(private db: AngularFirestore, 
+              private afAuth: AngularFireAuth, 
+              private http:HttpClient,
+              private router:Router) {
    this.usersCollection = db.collection('users');
    this.users = db.collection('users').valueChanges();
+   //afAuth.
   }
 /**
  * Update info
@@ -55,10 +72,13 @@ export class FireService {
         uid: this.afAuth.auth.currentUser.uid,
         name: name,
         apptoken: "adrian123fefe",
+        description:"student"
     }
-    console.log(info);
-    this.usersCollection.add(info);
+    this.changeUser(info)
+    this.getClientsInfo()
+    //this.usersCollection.add(info);
     this.usersCollection.doc(this.afAuth.auth.currentUser.uid).set(info);
+    this.router.navigate([''])
     })
 
 }
@@ -73,22 +93,39 @@ export class FireService {
     });
   }
 
-  getClientsInfo(key){
-    
-    this.key = key
-    return this.http.get<any[]>('https://bbtankshooter.herokuapp.com/api/1.0/').subscribe(a=>{
-      a.forEach(user=>{
-        console.log(user.apptoken, this.key)
-        if(user.apptoken == key){
-          this.kills.next(user.kills)
-          //this.currentkills=user.kills
-          console.log(this.currentkills)
-      }
+  // Get login information
+  getClientsInfo(){
+    var info
+    this.users.subscribe(a=>a.forEach(user=>{
+      if (user.uid == this.afAuth.auth.currentUser.uid){
+         info = {
+          uid: this.afAuth.auth.currentUser.uid,
+          name: this.afAuth.auth.currentUser.displayName,
+          apptoken: user.apptoken,
+          description:user.description
+        }
+        this.changeUser(info)
+        this.key.next(user.apptoken)
+        this.http.get<any[]>('https://bbtankshooter.herokuapp.com/api/1.0/').subscribe(a=>{
+          var found = false;
+          a.forEach(user=>{
+            //console.log(user.apptoken, this.key)
+            if(user.apptoken == info.apptoken){
+              console.log(user)
+              found = true
+              this.kills.next(user.kills)
+          } 
+          })
+          if(!found)
+          this.kills.next("0")
+        })
+        this.http.post('https://comp4711-hangman-api.herokuapp.com/api/users', "",{})
 
-      
         
-      })
-    })
+      }
+      }))
+
+
   }
   logout(){
     this.afAuth.auth.signOut()

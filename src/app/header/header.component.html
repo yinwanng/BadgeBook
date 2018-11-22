@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <mat-toolbar color="primary">
     <mat-toolbar-row>
         <span><button mat-button color="primary">BadgeBook</button></span>
@@ -11,3 +12,23 @@
         <button mat-button (click)="logout()" color="warning">Logout</button>
     </mat-toolbar-row>
 </mat-toolbar>
+=======
+<div *ngIf="afAuth.user | async as user; else showLogin">
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <span><button routerLink="/" mat-button >{{afAuth.auth.currentUser.displayName}}</button></span>
+            <span class="example-spacer"></span>
+            <mat-icon routerLink="/profile" class="example-icon">account_circle</mat-icon>
+            <button mat-button (click)="logout()" color="warning">Logout</button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</div>
+<ng-template #showLogin>
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <span><button mat-button color="primary">BadgeBook</button></span>
+            <span class="example-spacer"></span>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</ng-template>
+>>>>>>> 65de37111b85fdeaf44e28a37b5cdc0a04d24d0b

@@ -41,8 +41,12 @@ export class LoginComponent implements OnInit {
       console.log(res);
       this.errorMessage = "";
       this.successMessage = "Your account has been created";
+<<<<<<< HEAD
       this.router.navigate([''])
       
+=======
+      window.location.href = ''      
+>>>>>>> 65de37111b85fdeaf44e28a37b5cdc0a04d24d0b
     }, err => {
       console.log(err);
       this.errorMessage = err.message;

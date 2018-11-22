@@ -26,6 +26,11 @@ export class FireService {
   private description= new BehaviorSubject<string>("");
   private kills = new BehaviorSubject<string>("");
   private key = new BehaviorSubject<string>("");
+<<<<<<< HEAD
+=======
+  private hscore = new BehaviorSubject<string>("");
+  private hpercentile = new BehaviorSubject<string>("")
+>>>>>>> 65de37111b85fdeaf44e28a37b5cdc0a04d24d0b
   
   users: Observable<any[]>;
   currentkills = this.kills.asObservable();
@@ -33,6 +38,11 @@ export class FireService {
   currentname = this.name.asObservable();
   currentdescription = this.description.asObservable();
   currentkey = this.key.asObservable()
+<<<<<<< HEAD
+=======
+  currenthscore= this.hscore.asObservable()
+  currenthpercentile = this.hpercentile.asObservable()
+>>>>>>> 65de37111b85fdeaf44e28a37b5cdc0a04d24d0b
   apptoken:string;
   
   filter:any;
@@ -107,7 +117,11 @@ export class FireService {
         this.changeUser(info)
         this.key.next(user.apptoken)
         this.http.get<any[]>('https://bbtankshooter.herokuapp.com/api/1.0/').subscribe(a=>{
+<<<<<<< HEAD
           var found = false;
+=======
+          let found = false;
+>>>>>>> 65de37111b85fdeaf44e28a37b5cdc0a04d24d0b
           a.forEach(user=>{
             //console.log(user.apptoken, this.key)
             if(user.apptoken == info.apptoken){
@@ -119,7 +133,24 @@ export class FireService {
           if(!found)
           this.kills.next("0")
         })
+<<<<<<< HEAD
         this.http.post('https://comp4711-hangman-api.herokuapp.com/api/users', "",{})
+=======
+        this.http.get<any[]>('https://comp4711-hangman-api.herokuapp.com/api/users').subscribe(a=>{
+          let found = false
+        a.forEach(user=>{
+          //console.log(user)
+          if(user.key == info.apptoken){
+            found = true
+            console.log(user)
+            this.hscore.next(user.score)
+            this.hpercentile.next(user.top)
+          }
+        })
+          //console.log(a[0])
+
+        })
+>>>>>>> 65de37111b85fdeaf44e28a37b5cdc0a04d24d0b
 
         
       }

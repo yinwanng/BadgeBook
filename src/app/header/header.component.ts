@@ -10,6 +10,7 @@ import {Router} from '@angular/router'
 })
 export class HeaderComponent implements OnInit {
 
+
   constructor(private afs:FireService,             
      public afAuth: AngularFireAuth,
      private router:Router

@@ -12,14 +12,12 @@
 <app-badges></app-badges>
 <br>
 <mat-card>
-  <mat-card-title>Description
-    <span *ngIf="isDisabled == true"><a class="editbtn" (click)="toggleDisabled()"><mat-icon>border_color</mat-icon></a></span>
-    <span *ngIf="isDisabled == false"><a class="editbtn" (click)="toggleDisabled()"><mat-icon >done</mat-icon></a></span>
-  </mat-card-title>
-  <ckeditor *ngIf="isDisabled == false" [editor]="Editor" [disabled]="isDisabled" [(ngModel)]="model.editorData" (change)="onChange($event)"></ckeditor>
-  <ckeditor *ngIf="isDisabled == true" [editor]="Editor" [disabled]="isDisabled" [(ngModel)]="model.editorData" [config]={toolbar:[]} (change)="onChange($event)"></ckeditor>
+    <mat-card-title>Description
+        <span *ngIf="isDisabled == true"><a class="editbtn" (click)="toggleDisabled()"><mat-icon>border_color</mat-icon></a></span>
+        <span *ngIf="isDisabled == false"><a class="editbtn" (click)="toggleDisabled()"><mat-icon >done</mat-icon></a></span>
+    </mat-card-title>
+    <ckeditor *ngIf="isDisabled == false" [editor]="Editor" [disabled]="isDisabled" [(ngModel)]="model.editorData" (change)="onChange($event)"></ckeditor>
+    <ckeditor *ngIf="isDisabled == true" [editor]="Editor" [disabled]="isDisabled" [(ngModel)]="model.editorData" [config]={toolbar:[]} (change)="onChange($event)"></ckeditor>
 </mat-card>
-    <mat-card-title>Description</mat-card-title>
-    {{description}}
-
-</mat-card>
+<mat-card-title>Description</mat-card-title>
+{{description}}

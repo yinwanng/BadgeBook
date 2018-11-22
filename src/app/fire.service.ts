@@ -26,6 +26,8 @@ export class FireService {
   private description= new BehaviorSubject<string>("");
   private kills = new BehaviorSubject<string>("");
   private key = new BehaviorSubject<string>("");
+  private hscore = new BehaviorSubject<string>("");
+  private hpercentile = new BehaviorSubject<string>("")
   
   users: Observable<any[]>;
   currentkills = this.kills.asObservable();
@@ -33,6 +35,8 @@ export class FireService {
   currentname = this.name.asObservable();
   currentdescription = this.description.asObservable();
   currentkey = this.key.asObservable()
+  currenthscore= this.hscore.asObservable()
+  currenthpercentile = this.hpercentile.asObservable()
   apptoken:string;
   
   filter:any;
@@ -107,7 +111,7 @@ export class FireService {
         this.changeUser(info)
         this.key.next(user.apptoken)
         this.http.get<any[]>('https://bbtankshooter.herokuapp.com/api/1.0/').subscribe(a=>{
-          var found = false;
+          let found = false;
           a.forEach(user=>{
             //console.log(user.apptoken, this.key)
             if(user.apptoken == info.apptoken){
@@ -119,7 +123,20 @@ export class FireService {
           if(!found)
           this.kills.next("0")
         })
-        this.http.post('https://comp4711-hangman-api.herokuapp.com/api/users', "",{})
+        this.http.get<any[]>('https://comp4711-hangman-api.herokuapp.com/api/users').subscribe(a=>{
+          let found = false
+        a.forEach(user=>{
+          //console.log(user)
+          if(user.key == info.apptoken){
+            found = true
+            console.log(user)
+            this.hscore.next(user.score)
+            this.hpercentile.next(user.top)
+          }
+        })
+          //console.log(a[0])
+
+        })
 
         
       }

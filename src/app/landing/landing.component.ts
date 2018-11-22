@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {FireService} from '../fire.service'
+import { HttpClient } from '@angular/common/http';
+import { AngularFireAuth } from '@angular/fire/auth';
+
+
 
 @Component({
   selector: 'app-landing',
@@ -6,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
+  private _url = `https://comp4711-a1.herokuapp.com/api`;
+  url2:any
 
-  constructor() { }
 
+  constructor(private afs:FireService,             
+    public afAuth: AngularFireAuth,
+    private http: HttpClient
+   ) { }
+   
   ngOnInit() {
   }
   goLogin(){
@@ -22,11 +33,14 @@ export class LandingComponent implements OnInit {
   }
 
   goToTankGame() {
-    window.location.href = `https://comp4711-hangman.herokuapp.com/`;
+    window.location.href = `https://bbtankshooter.herokuapp.com/#`;
   }
 
   goToVideoChat() {
-    window.location.href = `https://comp4711-a1.herokuapp.com/`;
+    let myHeaders = new Headers();
+    myHeaders.append('token', 'badgebook'); 
+    this.http.post(this._url, myHeaders).subscribe( (data:any) => { window.location.href = data.url });
+    //window.location.href = `https://comp4711-a1.herokuapp.com/`;
   }
 
 }

@@ -22,6 +22,7 @@ import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileComponent } from './profile/profile.component';
 import { BadgesComponent } from './badges/badges.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { SearchComponent } from './search/search.component';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
@@ -82,8 +83,10 @@ const routes: Routes = [
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    CKEditorModule,
     HttpClientModule,
     MatButtonModule,
+    FormsModule,
     MatToolbarModule,
     MatCardModule,
     MatIconModule,

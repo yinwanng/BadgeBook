@@ -1,0 +1,13 @@
+<ng-select [items]="UserNameList | async" bindLabel="name" autofocus bindValue="uid" [(ngModel)]="filter">
+</ng-select>
+{{filter}}
+
+<div id="searchResultList " style="padding-top: 60px">
+    <ul>
+        <li class="text" *ngFor="let user of users | async ">
+            <a (click)="displayProfile(user) "> {{user.name}}</a>
+        </li>
+    </ul>
+    <ul id="myUL" onkeyup=" ">
+    </ul>
+</div>

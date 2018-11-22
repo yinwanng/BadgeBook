@@ -1,25 +1,25 @@
 <mat-card>
     <mat-card-title>Badges</mat-card-title>
-      <div class="mdc-layout-grid">
+    <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell">
-            <p>
-              <img src="../../assets/img/hangman-icon.png" class="badgeIcon" (click)="goToHangmanGame()">
-              <span matBadge="1" matBadgeOverlap="false">Hangman Rank</span>
-            </p>
-          </div>
-          <div class="mdc-layout-grid__cell">
-            <p>
-              <img src="../../assets/img/tank-icon.png" class="badgeIcon">
-              <span matBadge="14" matBadgeOverlap="false">Tank Game Top</span>
-            </p>
-          </div>
-          <div class="mdc-layout-grid__cell">
-              <p>
-                <img src="../../assets/img/javascript-icon.png" class="badgeIcon">
-                <span matBadge="10" matBadgeOverlap="false">JavaScript Top</span>
-              </p>
-          </div>
+            <div class="mdc-layout-grid__cell">
+                <p>
+                    <img src="../../assets/img/hangman-icon.png" class="badgeIcon" (click)="goToHangmanGame()">
+                    <span matBadge="1" matBadgeOverlap="false">Hangman Rank</span>
+                </p>
+            </div>
+            <div class="mdc-layout-grid__cell">
+                <p>
+                    <img src="../../assets/img/tank-icon.png" class="badgeIcon">
+                    <span matBadge="{{kills}}" matBadgeOverlap="false">Tank Game Top</span>
+                </p>
+            </div>
+            <div class="mdc-layout-grid__cell">
+                <p>
+                    <img src="../../assets/img/javascript-icon.png" class="badgeIcon">
+                    <span matBadge="10" matBadgeOverlap="false">JavaScript Top</span>
+                </p>
+            </div>
         </div>
-      </div>
-  </mat-card>
+    </div>
+</mat-card>

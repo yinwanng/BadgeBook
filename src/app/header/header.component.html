@@ -3,7 +3,9 @@
         <mat-toolbar-row>
             <span><button routerLink="/" mat-button >{{afAuth.auth.currentUser.displayName}}</button></span>
             <span class="example-spacer"></span>
-            <mat-icon routerLink="/profile" class="example-icon">account_circle</mat-icon>
+            <button mat-button>
+                <mat-icon routerLink="/profile" class="example-icon">account_circle</mat-icon>
+            </button>
             <button mat-button (click)="logout()" color="warning">Logout</button>
         </mat-toolbar-row>
     </mat-toolbar>

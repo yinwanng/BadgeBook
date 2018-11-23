@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import {FireService} from '../fire.service'
-import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs';
-import { AngularFirestore } from 'angularfire2/firestore';
-
-
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
@@ -21,25 +16,26 @@ import { AngularFirestore } from 'angularfire2/firestore';
 })
   
 export class ResultComponent implements OnInit {
-  public items: Observable<any[]>;
-
-  public db : AngularFirestore;
-  constructor() 
+  public NameList : String[];
+  constructor(private afs : FireService) 
   {
-   //afs.collection('people', ref => ref.where('name', '==', 'jeff') )
+    //afs.collection('people', ref => ref.where('name', '==', 'jeff') )
   }
 
   ngOnInit() {
-    let user = this.db.doc('/users/name');
-    console.log(user);
-    this.createOneCart("user");
+    //let user = this.db.doc('/users/name');
+    //console.log(user);
+    this.NameList = this.afs.GetNameList();
+    for(let i = 0 ; i < this.NameList.length; ++i)
+    {
+      this.createOneCart(this.NameList[i]);
+    }
+    //this.createOneCart(this.fire.SearchUser("Joseph", null));
     //this.createOneCart("Tim");
     //this.createOneCart("Alan");
     //this.createOneCart("Adiran");
 
   }
-
-
   createOneCart(name){
     let container = document.getElementById("topLayer");
     let card = document.createElement("div");
@@ -87,6 +83,7 @@ export class ResultComponent implements OnInit {
     card_body.appendChild(a);
 
     p.textContent= "this is JS god";
+    //console.log("Name = " + name);
     card_header.textContent = name;
   }
 }

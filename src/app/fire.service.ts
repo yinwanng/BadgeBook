@@ -6,8 +6,8 @@ import {UserModule} from './models/user/user.module'
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import {Router} from '@angular/router'
-
 import { HttpHeaders } from '@angular/common/http';
+import { resolve } from 'q';
 
 
 
@@ -127,6 +127,39 @@ export class FireService {
 
 
   }
+
+  ListofNames: String[] = [];
+
+  resultcallback()  {this.router.navigateByUrl('/result')}
+  GetNameList()
+  {
+    return this.ListofNames;
+  }
+  SearchUser()
+  {
+    
+    let list;
+    console.log(document.getElementById("mySearchInput").innerText)
+    var name = document.getElementById("mySearchInput")
+    //var name = "Joseph"
+    this.users.subscribe( 
+      data => data.forEach( user => 
+      { 
+        if(user.name.indexOf(name) >= 0)
+        {
+          //console.log(user.name)
+          this.ListofNames.push(user.name)
+          this.router.navigate(['result'])
+        }
+        
+      }),e=> console.log("Error"),()=>console.log("completed")
+      // end of foreach    
+      
+    )
+      
+  }
+
+
   logout(){
     this.afAuth.auth.signOut()
   }

@@ -6,12 +6,12 @@ import {FireService} from '../fire.service'
   templateUrl: './result.component.html',
   styleUrls: ['./result.component.css'],
   //selector: 'app-root',
-    // template: `
+   //  template: `
     //     <ul>
     //         <li *ngFor="let item of items | async">
-    //             <pre>{{ item | json }}</pre>
+     //            <pre>{{ item | json }}</pre>
     //         </li>
-    //     </ul>
+     //    </ul>
     // `
 })
   

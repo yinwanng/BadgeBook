@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FireService} from '../fire.service'
 import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/auth';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { TokenDialogComponent } from '../token-dialog/token-dialog.component';
 
 
 
@@ -17,7 +19,8 @@ export class LandingComponent implements OnInit {
 
   constructor(private afs:FireService,             
     public afAuth: AngularFireAuth,
-    private http: HttpClient
+    private http: HttpClient,
+    public dialog: MatDialog
    ) { }
    
   ngOnInit() {
@@ -42,5 +45,17 @@ export class LandingComponent implements OnInit {
     this.http.post(this._url, myHeaders).subscribe( (data:any) => { window.location.href = data.url });
     //window.location.href = `https://comp4711-a1.herokuapp.com/`;
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(TokenDialogComponent, {
+      width: '25%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+
 
 }

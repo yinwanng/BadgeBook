@@ -13,8 +13,7 @@ export class ProfileComponent implements OnInit {
   // imagePreview: string;
   public Editor = ClassicEditor;
   public isDisabled = true;
-  public description = '<p>My name is Earl. I am fast and write PHP for BCIT schools. here is my loooong story ... . Here is my project screenshot<br>' + 
-    'alt="Earl\'s project" id="imgProj"> </p>';
+  public description = 'loading description';
   public model = {
     editorData: this.description
   };
@@ -56,13 +55,14 @@ export class ProfileComponent implements OnInit {
     this.fire.currentkey.subscribe(key=> this.subkey = key);
     this.fire.currentuid.subscribe(uid => {
       this.uid = uid
-      
+      console.log(this.uid)
     });
     this.fire.currentname.subscribe(name => this.name = name);
-    this.fire.currentdescription.subscribe(description => this.description = description);
+    this.fire.currentdescription.subscribe(description => {this.description = description;this.model.editorData = description});
     console.log(this.subkey)
     console.log(this.uid)
 
+    
   }
   foo(){
     //this.fire.getClientsInfo("asaldivar18")

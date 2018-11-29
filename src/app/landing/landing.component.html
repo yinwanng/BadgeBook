@@ -1,8 +1,12 @@
-<br>
-<br>
-<br>
-<br>
 <div *ngIf="afAuth.user | async as user; else showLogin">
+    <mat-card>
+        <mat-card-title>Your Subscription token</mat-card-title>
+        <button mat-raised-button (click)="openDialog()">Open token</button>
+    </mat-card>
+    <br><br>
+
+    <app-badges></app-badges>
+
     <mat-card>
         <mat-card-title>Web Applications</mat-card-title>
         <div class="mdc-layout-grid">
@@ -27,8 +31,10 @@
                 </div>
             </div>
         </div>
-
     </mat-card>
+
+
+
 </div>
 <ng-template #showLogin>
     <mat-card>

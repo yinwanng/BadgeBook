@@ -9,6 +9,7 @@ import {Router} from '@angular/router'
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  filter:any
 
   constructor(private afs:FireService,             
      public afAuth: AngularFireAuth,
@@ -18,10 +19,17 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+
   logout(){
     console.log("foo")
     this.afs.logout();
     this.router.navigate([''])
+  }
+
+  SearchUser(input)
+  {
+    //console.log("ok")
+    this.afs.SearchUser(input);
   }
 
 }

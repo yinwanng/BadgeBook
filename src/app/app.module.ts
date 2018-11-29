@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ClipboardModule } from 'ngx-clipboard';
 
@@ -17,6 +18,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 
@@ -100,7 +102,8 @@ const routes: Routes = [
     NgSelectModule,
     MatInputModule,
     MatDialogModule,
-    ClipboardModule
+    ClipboardModule,
+    ReactiveFormsModule
 
     
   ],

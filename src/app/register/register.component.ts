@@ -6,6 +6,8 @@ import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import {FireService} from '../fire.service'
 import * as firebase from 'firebase/app';
 import { AES } from 'crypto-ts';
+import {FormControl, Validators} from '@angular/forms';
+
  
 
 
@@ -58,8 +60,17 @@ export class RegisterComponent implements OnInit {
 this.key = AES.encrypt('message', 'test').toString();
   }
 
+  emailc = new FormControl('', [Validators.required, Validators.email]);
+
+  getErrorMessage() {
+    return this.emailc.hasError('required') ? 'You must enter a value' :
+        this.emailc.hasError('email') ? 'Not a valid email' :
+            '';
+  }
+
   tryRegister(){
-    this.authService.doRegister({
+    try{
+      this.authService.doRegister({
         username:this.username, 
         email:this.email,
         password:this.password,
@@ -69,12 +80,12 @@ this.key = AES.encrypt('message', 'test').toString();
       console.log(res);
       this.errorMessage = "";
       this.successMessage = "Your account has been created";
-      
-    }, err => {
-      console.log(err);
-      this.errorMessage = err.message;
-      this.successMessage = "";
     })
-  }
+   
+    } catch(e){
+      this.errorMessage = e.message
+      this.successMessage = ""
+    }
 
-}
+
+}}

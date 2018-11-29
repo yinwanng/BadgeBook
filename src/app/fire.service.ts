@@ -92,7 +92,6 @@ export class FireService {
     this.usersCollection.doc(this.afAuth.auth.currentUser.uid).set(info);
     this.router.navigate([''])
     })
-
 }
 
   /**

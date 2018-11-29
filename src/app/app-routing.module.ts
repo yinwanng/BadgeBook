@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import{CoreComponent} from './core/core.component'
 import { ProfileComponent } from './profile/profile.component';
+import {SearchComponent} from './search/search.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path:"",
     component:CoreComponent
+  },
+  {
+    path:'search',
+    component:SearchComponent
   }
   
 ];

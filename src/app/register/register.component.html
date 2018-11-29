@@ -9,6 +9,21 @@
         <mat-form-field class="example-full-width">
             <input matInput placeholder="Enter Password" [(ngModel)]="password" name="password" type="password" value="">
         </mat-form-field>
-        <button mat-raised-button class="example-full-width" (click)="tryRegister()" color="primary">Create Account</button>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Your Key" [(ngModel)]="key" name="key" type="text" value="{{key}}">
+        </mat-form-field>
+        <button mat-raised-button class="example-full-width" (click)="newKey()">New key</button>
+
     </form>
+    <mat-card>
+        <mat-card-title>Description
+            <span *ngIf="isDisabled == true"><a class="editbtn" (click)="toggleDisabled()"><mat-icon>border_color</mat-icon></a></span>
+            <span *ngIf="isDisabled == false"><a class="editbtn" (click)="toggleDisabled()"><mat-icon >done</mat-icon></a></span>
+        </mat-card-title>
+        <ckeditor *ngIf="isDisabled == false" [editor]="Editor" [disabled]="isDisabled" [(ngModel)]="model.editorData" (change)="onChange($event)"></ckeditor>
+        <ckeditor *ngIf="isDisabled == true" [editor]="Editor" [disabled]="isDisabled" [(ngModel)]="model.editorData" [config]={toolbar:[]} (change)="onChange($event)"></ckeditor>
+    </mat-card>
+    <!-- <textarea matInput placeholder="Profile description" type="text" value="{{description}}"></textarea> -->
+    <button mat-raised-button class="example-full-width" (click)="tryRegister()" color="primary">Create Account</button>
+
 </mat-card>

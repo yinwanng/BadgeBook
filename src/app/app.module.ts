@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ClipboardModule } from 'ngx-clipboard';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +16,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatInputModule} from '@angular/material/input';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 
@@ -40,7 +44,7 @@ import { environment } from '../environments/environment';
 import { CoreComponent } from './core/core.component';
 import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
-
+import { TokenDialogComponent } from './token-dialog/token-dialog.component';
 
 
 const routes: Routes = [
@@ -73,7 +77,8 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     UserComponent,
-    LandingComponent
+    LandingComponent,
+    TokenDialogComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -93,12 +98,15 @@ const routes: Routes = [
     MatBadgeModule,
     FormsModule,
     NgSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule,
+    ClipboardModule
 
     
   ],
   
   providers: [],
+  entryComponents: [TokenDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

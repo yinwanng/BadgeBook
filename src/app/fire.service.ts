@@ -17,6 +17,10 @@ import { HttpHeaders } from '@angular/common/http';
 export class FireService {
 
   private usersCollection: AngularFirestoreCollection;
+  //apptoken:string;
+  filterResult: any[] = []
+  filter:any;
+
 
   /**
    * 
@@ -28,7 +32,9 @@ export class FireService {
   private key = new BehaviorSubject<string>("");
   private hscore = new BehaviorSubject<string>("");
   private hpercentile = new BehaviorSubject<string>("")
-  
+  private results = new BehaviorSubject<any[]>(this.filterResult);
+  private filterInput = new BehaviorSubject<string>(this.filter)
+  private apptoken = new BehaviorSubject<string>("")
   users: Observable<any[]>;
   currentkills = this.kills.asObservable();
   currentuid = this.uid.asObservable();
@@ -37,9 +43,11 @@ export class FireService {
   currentkey = this.key.asObservable()
   currenthscore= this.hscore.asObservable()
   currenthpercentile = this.hpercentile.asObservable()
-  apptoken:string;
+  currentResults = this.results.asObservable();
+  currentFilter = this.filterInput.asObservable();
+  currentToken = this.apptoken.asObservable();
+ 
   
-  filter:any;
   
 
   constructor(private db: AngularFirestore, 
@@ -58,6 +66,7 @@ export class FireService {
     this.name.next(user.name)
     this.description.next(user.description)
     this.uid.next(user.uid);
+    this.apptoken.next(user.apptoken);
   }
   /**
    * Creates a new account using firebase auth
@@ -66,7 +75,6 @@ export class FireService {
    */
   doRegister(user){
     var name = user.username
-    console.log(user)
     return this.afAuth.auth.createUserWithEmailAndPassword(user.email,user.password).then(a=>{
       this.afAuth.auth.currentUser.updateProfile({
         displayName:user.username,
@@ -75,8 +83,8 @@ export class FireService {
       var info = {
         uid: this.afAuth.auth.currentUser.uid,
         name: name,
-        apptoken: "adrian123fefe",
-        description:"student"
+        apptoken: user.key,
+        description:user.description
     }
     this.changeUser(info)
     this.getClientsInfo()
@@ -113,9 +121,7 @@ export class FireService {
         this.http.get<any[]>('https://bbtankshooter.herokuapp.com/api/1.0/').subscribe(a=>{
           let found = false;
           a.forEach(user=>{
-            //console.log(user.apptoken, this.key)
             if(user.apptoken == info.apptoken){
-              console.log(user)
               found = true
               this.kills.next(user.kills)
           } 
@@ -129,21 +135,40 @@ export class FireService {
           //console.log(user)
           if(user.key == info.apptoken){
             found = true
-            console.log(user)
             this.hscore.next(user.score)
             this.hpercentile.next(user.top)
           }
         })
-          //console.log(a[0])
-
         })
 
         
       }
       }))
-
-
   }
+
+  /**
+   * Find users containing input
+   * @param input query
+   */
+  SearchUser(input){
+    this.filterInput.next(input);
+    this.users.subscribe(UsersCollection=>{
+        UsersCollection.forEach(user=>{
+                let desc = user.description
+                let name = user.name
+                if (desc.includes(input)){
+                  this.filterResult.push(user)
+                } else if (name.includes(input)){
+                  this.filterResult.push(user)
+                }
+          })
+          this.results.next(this.filterResult)
+        });
+        this.router.navigate(['search']);
+}
+/**
+ * Log out of firebase auth
+ */
   logout(){
     this.afAuth.auth.signOut()
   }

@@ -1,16 +1,17 @@
 <mat-card>
-
     <mat-card-title (click)="foo()"> {{name}}</mat-card-title>
+
     <div>
         <button id="btnEditProfilePicture" mat-stroked-button type="button" (click)="filePicker.click()">Edit Profile Image</button>
         <input type="file" #filePicker (change)="onImagePicked($event)">
     </div>
-    <img src="../../assets/img/johnny.jpeg" id="profileImg">
+    <img id="profileImg">
 </mat-card>
 <br>
 
 <app-badges></app-badges>
-<br>
+<br><br>
+
 <mat-card>
     <mat-card-title>Description
         <span *ngIf="isDisabled == true"><a class="editbtn" (click)="toggleDisabled()"><mat-icon>border_color</mat-icon></a></span>
@@ -19,5 +20,4 @@
     <ckeditor *ngIf="isDisabled == false" [editor]="Editor" [disabled]="isDisabled" [(ngModel)]="model.editorData" (change)="onChange($event)"></ckeditor>
     <ckeditor *ngIf="isDisabled == true" [editor]="Editor" [disabled]="isDisabled" [(ngModel)]="model.editorData" [config]={toolbar:[]} (change)="onChange($event)"></ckeditor>
 </mat-card>
-<mat-card-title>Description</mat-card-title>
-{{description}}
+<br><br>

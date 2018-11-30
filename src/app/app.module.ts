@@ -47,6 +47,7 @@ import { CoreComponent } from './core/core.component';
 import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
 import { TokenDialogComponent } from './token-dialog/token-dialog.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 const routes: Routes = [
@@ -80,7 +81,8 @@ const routes: Routes = [
     RegisterComponent,
     UserComponent,
     LandingComponent,
-    TokenDialogComponent
+    TokenDialogComponent,
+    ChatComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

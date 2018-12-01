@@ -14,16 +14,22 @@ import { TokenDialogComponent } from '../token-dialog/token-dialog.component';
 })
 export class LandingComponent implements OnInit {
   private _url = `https://comp4711-a1.herokuapp.com/api`;
+  //private _urltank = "http://localhost:3000/api/1.0/login"
+  private _urltank = 'https://bbtankshooter.herokuapp.com/api/1.0/login'
   url2:any
+  token:any;
 
 
   constructor(private afs:FireService,             
     public afAuth: AngularFireAuth,
     private http: HttpClient,
-    public dialog: MatDialog
+    public dialog: MatDialog,
    ) { }
    
   ngOnInit() {
+    this.afs.currentkey.subscribe(token=>{
+      this.token=token
+    console.log(this.token)})
   }
   goLogin(){
     //document.getElementById("loginsect").
@@ -36,12 +42,19 @@ export class LandingComponent implements OnInit {
   }
 
   goToTankGame() {
-    window.location.href = `https://bbtankshooter.herokuapp.com/#`;
+    let myHeaders = {
+      token: this.token
+    }
+    this.http.post<any>(this._urltank+'/'+this.token,myHeaders)
+    .subscribe((data:any)=>{
+        console.log(data)
+        window.open(data.url);
+    })
   }
 
   goToVideoChat() {
     let myHeaders = new Headers();
-    myHeaders.append('token', 'badgebook'); 
+    myHeaders.append('token', this.token); 
     this.http.post(this._url, myHeaders).subscribe( (data:any) => { window.location.href = data.url });
     //window.location.href = `https://comp4711-a1.herokuapp.com/`;
   }

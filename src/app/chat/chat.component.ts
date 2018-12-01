@@ -14,4 +14,6 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     this.afs.users.subscribe(users=>this.users = users)
   }
+
+  //hello chat
 }

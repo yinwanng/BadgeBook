@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 
-import {MatButtonModule, MatToolbarModule} from '@angular/material';
+import {MatButtonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatTableModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
@@ -48,6 +48,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
 import { TokenDialogComponent } from './token-dialog/token-dialog.component';
 import { ChatComponent } from './chat/chat.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 
 const routes: Routes = [
@@ -66,6 +67,10 @@ const routes: Routes = [
   {
     path:"index",
     component:CoreComponent
+  },
+  {
+    path:"chat",
+    component:ChatComponent
   }
 ];
 
@@ -100,12 +105,16 @@ const routes: Routes = [
     MatCardModule,
     MatIconModule,
     MatBadgeModule,
+    MatTableModule,
     FormsModule,
     NgSelectModule,
     MatInputModule,
     MatDialogModule,
     ClipboardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LayoutModule,
+    MatSidenavModule,
+    MatListModule
 
     
   ],

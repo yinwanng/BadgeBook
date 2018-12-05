@@ -1,32 +1,67 @@
-<br>
-<br>
-<br>
-<br>
+<div *ngIf="afAuth.user | async as user; else showLogin">
+    <mat-card>
+        <mat-card-title>Your Subscription token</mat-card-title>
+        <button mat-raised-button (click)="openDialog()">Open token</button>
+    </mat-card>
+    <br><br>
 
-<mat-card>
-    <mat-card-title>Web Applications</mat-card-title>
-    <div class="mdc-layout-grid">
-        <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell">
-                <p>
-                    <img src="../../assets/img/hangman-icon.png" class="badgeIcon" (click)="goToHangmanGame()">
-                    <span matBadgeOverlap="false">Hangman</span>
-                </p>
-            </div>
-            <div class="mdc-layout-grid__cell">
-                <p>
-                    <img src="../../assets/img/tank-icon.png" class="badgeIcon" (click)="goToTankGame()">
-                    <span matBadgeOverlap="false">Tank Game</span>
-                </p>
-            </div>
-            <div class="mdc-layout-grid__cell">
-                <p>
-                    <img src="../../assets/img/videocam-icon.jpg" class="badgeIcon" (click)="goToVideoChat()">
-                    <span matBadgeOverlap="false">Video Chat</span>
-                </p>
+    <app-badges></app-badges>
+
+    <mat-card>
+        <mat-card-title>Web Applications</mat-card-title>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell">
+                    <p>
+                        <img src="../../assets/img/hangman-icon.png" class="badgeIcon" (click)="goToHangmanGame()">
+                        <span matBadgeOverlap="false">Hangman</span>
+                    </p>
+                </div>
+                <div class="mdc-layout-grid__cell">
+                    <p>
+                        <img src="../../assets/img/tank-icon.png" class="badgeIcon" (click)="goToTankGame()">
+                        <span matBadgeOverlap="false">Tank Game</span>
+                    </p>
+                </div>
+                <div class="mdc-layout-grid__cell">
+                    <p>
+                        <img src="../../assets/img/videocam-icon.jpg" class="badgeIcon" (click)="goToVideoChat()">
+                        <span matBadgeOverlap="false">Video Chat</span>
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <button mat-button routerLink="login" id="loginButton">Login to BadgeBook</button>
-    <!-- <app-login></app-login> -->
-</mat-card>
+    </mat-card>
+
+
+
+</div>
+<ng-template #showLogin>
+    <mat-card>
+        <mat-card-title>Web Applications</mat-card-title>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell">
+                    <p>
+                        <img src="../../assets/img/hangman-icon.png" class="badgeIcon" (click)="goToHangmanGame()">
+                        <span matBadgeOverlap="false">Hangman</span>
+                    </p>
+                </div>
+                <div class="mdc-layout-grid__cell">
+                    <p>
+                        <img src="../../assets/img/tank-icon.png" class="badgeIcon" (click)="goToTankGame()">
+                        <span matBadgeOverlap="false">Tank Game</span>
+                    </p>
+                </div>
+                <div class="mdc-layout-grid__cell">
+                    <p>
+                        <img src="../../assets/img/videocam-icon.jpg" class="badgeIcon" (click)="goToVideoChat()">
+                        <span matBadgeOverlap="false">Video Chat</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <button mat-button routerLink="login" id="loginButton">Login to BadgeBook</button>
+
+    </mat-card>
+</ng-template>

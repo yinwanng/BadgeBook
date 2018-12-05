@@ -4,6 +4,9 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import{CoreComponent} from './core/core.component'
+import { ProfileComponent } from './profile/profile.component';
+import {SearchComponent} from './search/search.component';
+import {ChatComponent} from './chat/chat.component';
 
 const routes: Routes = [
   {
@@ -23,8 +26,20 @@ const routes: Routes = [
     component:CoreComponent
   },
   {
+    path:'profile',
+    component:ProfileComponent
+  },
+  {
     path:"",
     component:CoreComponent
+  },
+  {
+    path:'search',
+    component:SearchComponent
+  },
+  {
+    path:'chat',
+    component:ChatComponent
   }
   
 ];

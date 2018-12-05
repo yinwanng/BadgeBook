@@ -1,13 +1,25 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <span><button mat-button color="primary">BadgeBook</button></span>
-        <span class="example-spacer"></span>
-        <!-- Which button click, should show search result and also route to result page -->
-        <input type="text" id="mySearchInput" style="height: 50%;width: 30%;margin: auto" placeholder="Search for names,descriptions" value=" ">
-        <!-- createOneCart() is in result.component.ts, fail to call here -->
-        <button (click)="SearchUser()" class="btn btn-primary">Search</button>
-        <mat-icon class="example-icon">favorite</mat-icon>
-        <mat-icon class="example-icon">delete</mat-icon>
-        <button mat-button (click)="logout()" color="warning">Logout</button>
-    </mat-toolbar-row>
-</mat-toolbar>
+<div *ngIf="afAuth.user | async as user; else showLogin">
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <span><button routerLink="/" mat-button >{{afAuth.auth.currentUser.displayName}}</button></span>
+            <span class="example-spacer"></span>
+            <input type="text" [(ngModel)]="filter" id="mySearchInput" style="height: 50%;width: 30%;margin: auto" placeholder="Search for names,descriptions" value=" ">
+            <button (click)="SearchUser(filter)" class="btn btn-primary">Search</button>
+            <button mat-button>
+                <mat-icon routerLink="/profile" class="example-icon">account_circle</mat-icon>
+            </button>
+            <button mat-button>
+                <mat-icon routerLink="/chat" class="example-icon">chat</mat-icon>
+            </button>
+            <button mat-button (click)="logout()" color="warning">Logout</button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</div>
+<ng-template #showLogin>
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <span><button mat-button color="white">BadgeBook</button></span>
+            <span class="example-spacer"></span>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</ng-template>

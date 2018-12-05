@@ -25,7 +25,7 @@ export class ResultComponent implements OnInit {
   ngOnInit() {
     //let user = this.db.doc('/users/name');
     //console.log(user);
-    this.NameList = this.afs.GetNameList();
+    //this.NameList = this.afs.GetNameList();
     for(let i = 0 ; i < this.NameList.length; ++i)
     {
       this.createOneCart(this.NameList[i]);

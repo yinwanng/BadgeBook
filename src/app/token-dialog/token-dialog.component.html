@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Your API Key</h1>
+<div mat-dialog-content>
+    <p>Enter this key into our external services.</p>
+    <div class="row">
+        <mat-form-field class="example-full-width">
+            <input matInput value={{token}} #inputTarget readonly>
+            <mat-icon matSuffix [ngxClipboard]="inputTarget">mode_edit</mat-icon>
+
+
+        </mat-form-field>
+
+    </div>
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Okay</button>
+</div>

@@ -7,6 +7,8 @@ import {FireService} from '../fire.service'
 })
 export class BadgesComponent implements OnInit {
   kills:any
+  hscore:any
+  hpercent:any
 
   constructor(private afs:FireService) { }
 
@@ -15,6 +17,9 @@ export class BadgesComponent implements OnInit {
       //console.log(a)
       this.kills=a;
     })
+    this.afs.currenthscore.subscribe(a=>{this.hscore=a})
+    this.afs.currenthpercentile.subscribe(a=>this.hpercent=a)
+    this.afs.getClientsInfo()
   }
 
   goToHangmanGame() {

@@ -15,17 +15,18 @@ import { TokenDialogComponent } from '../token-dialog/token-dialog.component';
 export class LandingComponent implements OnInit {
   private _url = `https://comp4711-a1.herokuapp.com/api`;
   //private _urltank = "http://localhost:3000/api/1.0/login"
-  private _urltank = 'https://bbtankshooter.herokuapp.com/api/1.0/login'
+  private _urltank = 'https://bbtankshooter.herokuapp.com/api/1.0/login';
+  private _urlhangman = 'https://comp4711-hangman.herokuapp.com/external.php';
   url2:any
   token:any;
 
 
-  constructor(private afs:FireService,             
+  constructor(private afs:FireService,
     public afAuth: AngularFireAuth,
     private http: HttpClient,
     public dialog: MatDialog,
    ) { }
-   
+
   ngOnInit() {
     this.afs.currentkey.subscribe(token=>{
       this.token=token
@@ -33,12 +34,19 @@ export class LandingComponent implements OnInit {
   }
   goLogin(){
     //document.getElementById("loginsect").
-  
+
     window.location.href = 'login'
   }
 
   goToHangmanGame() {
-    window.location.href = `https://comp4711-hangman.herokuapp.com/`;
+    let myHeaders = {
+      apptoken: this.token,
+      clientkey: 'hangman4711'
+    }
+    this.http.post<any>(this._urlhangman, myHeaders).subscribe((data:any)=>{
+      console.log(data)
+      window.open(data.url);
+    })
   }
 
   goToTankGame() {
@@ -54,7 +62,7 @@ export class LandingComponent implements OnInit {
 
   goToVideoChat() {
     let myHeaders = new Headers();
-    myHeaders.append('token', this.token); 
+    myHeaders.append('token', this.token);
     this.http.post(this._url, myHeaders).subscribe( (data:any) => { window.location.href = data.url });
     //window.location.href = `https://comp4711-a1.herokuapp.com/`;
   }

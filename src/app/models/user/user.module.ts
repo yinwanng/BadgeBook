@@ -11,4 +11,5 @@ export class UserModule {
   uid:any
   description:any;
   name: any;
+  photoLink: any;
  }

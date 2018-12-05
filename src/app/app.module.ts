@@ -1,7 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ClipboardModule } from 'ngx-clipboard';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +17,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatInputModule} from '@angular/material/input';
+import {MatDialogModule} from '@angular/material/dialog';
+
+
 
 
 
@@ -22,6 +28,7 @@ import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileComponent } from './profile/profile.component';
 import { BadgesComponent } from './badges/badges.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { SearchComponent } from './search/search.component';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
@@ -41,6 +48,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
 import { ResultComponent } from './result/result.component';
 
+import { TokenDialogComponent } from './token-dialog/token-dialog.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 const routes: Routes = [
@@ -74,7 +83,9 @@ const routes: Routes = [
     RegisterComponent,
     UserComponent,
     LandingComponent,
-    ResultComponent
+    ResultComponent,
+    TokenDialogComponent,
+    ChatComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -84,8 +95,10 @@ const routes: Routes = [
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    CKEditorModule,
     HttpClientModule,
     MatButtonModule,
+    FormsModule,
     MatToolbarModule,
     MatCardModule,
     MatIconModule,
@@ -95,11 +108,16 @@ const routes: Routes = [
     MatInputModule,
     RouterModule.forRoot([
       {path:'result',component:ResultComponent}
-    ])
+    ]),
+    MatDialogModule,
+    ClipboardModule,
+    ReactiveFormsModule
+
     
   ],
   
   providers: [],
+  entryComponents: [TokenDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

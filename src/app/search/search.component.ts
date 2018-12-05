@@ -21,24 +21,22 @@ export class SearchComponent implements OnInit {
   uid: any;
   name: any;
   description: any;
+  results: any[];
+  kills: any;
+  hscore: any;
+  hpercent: any;
 
   constructor(private fire: FireService, private db:AngularFirestore) {
-    //this.fire.users =  this.users;
-    //this.uid = 
     this.usersCollection = db.collection('users');
     this.users = db.collection('users').valueChanges();
   }
 
-
-  displayProfile(user){
-    console.log(user)
-    this.fire.changeUser(user)
-  }
   ngOnInit() {
-    this.fire.currentuid.subscribe(uid => this.uid = uid);
-    this.fire.currentname.subscribe(name => this.name = name);
-    this.fire.currentdescription.subscribe(description => this.description = description);
-    
+    this.fire.currentResults.subscribe(results=>{this.results = results; console.log(this.results)})
+    this.fire.currentFilter.subscribe(filter=>this.filter = filter);
+    this.fire.currentkills.subscribe(a=>{this.kills=a;console.log(this.kills)})
+    this.fire.currenthscore.subscribe(a=>{this.hscore=a;console.log(this.hscore)})
+    this.fire.currenthpercentile.subscribe(a=>this.hpercent=a)
   }
 
 }

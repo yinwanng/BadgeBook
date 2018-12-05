@@ -1,0 +1,5 @@
+<ul>
+    <li class="text" *ngFor="let user of users | async ">
+        <a (click)="displayProfile(user) "> {{user.name}}</a>
+    </li>
+</ul>

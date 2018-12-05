@@ -23,11 +23,12 @@ export class FireService {
 
 
   /**
-   * 
+   *
    */
   private uid= new BehaviorSubject<string>("");
   private name= new BehaviorSubject<string>("");
   private description= new BehaviorSubject<string>("");
+  private photoLink= new BehaviorSubject<string>("");
   private kills = new BehaviorSubject<string>("");
   private key = new BehaviorSubject<string>("");
   private hscore = new BehaviorSubject<string>("");
@@ -40,18 +41,19 @@ export class FireService {
   currentuid = this.uid.asObservable();
   currentname = this.name.asObservable();
   currentdescription = this.description.asObservable();
+  currentPhotoLink = this.photoLink.asObservable();
   currentkey = this.key.asObservable()
   currenthscore= this.hscore.asObservable()
   currenthpercentile = this.hpercentile.asObservable()
   currentResults = this.results.asObservable();
   currentFilter = this.filterInput.asObservable();
   currentToken = this.apptoken.asObservable();
- 
-  
-  
 
-  constructor(private db: AngularFirestore, 
-              private afAuth: AngularFireAuth, 
+
+
+
+  constructor(private db: AngularFirestore,
+              private afAuth: AngularFireAuth,
               private http:HttpClient,
               private router:Router) {
    this.usersCollection = db.collection('users');
@@ -65,26 +67,28 @@ export class FireService {
   changeUser(user){
     this.name.next(user.name)
     this.description.next(user.description)
+    this.photoLink.next(user.photoLink)
     this.uid.next(user.uid);
     this.apptoken.next(user.apptoken);
   }
   /**
    * Creates a new account using firebase auth
    * @param user Account
-   * @returns Observable<> 
+   * @returns Observable<>
    */
   doRegister(user){
     var name = user.username
     return this.afAuth.auth.createUserWithEmailAndPassword(user.email,user.password).then(a=>{
       this.afAuth.auth.currentUser.updateProfile({
-        displayName:user.username,
-        photoURL:""
+        displayName: user.username,
+        photoURL: ``
       })
       var info = {
         uid: this.afAuth.auth.currentUser.uid,
         name: name,
         apptoken: user.key,
-        description:user.description
+        description: user.description,
+        photoLink: user.photoLink
     }
     this.changeUser(info)
     this.getClientsInfo()
@@ -100,20 +104,21 @@ export class FireService {
   doLogin(user){
     return this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password).then(a=>{
       this.name.next(this.afAuth.auth.currentUser.displayName)
-      
+
     });
   }
 
   // Get login information
   getClientsInfo(){
-    var info
-    this.users.subscribe(a=>a.forEach(user=>{
-      if (user.uid == this.afAuth.auth.currentUser.uid){
+    var info;
+    this.users.subscribe(a=>a.forEach(user =>{
+      if (user.uid == this.afAuth.auth.currentUser.uid) {
          info = {
           uid: this.afAuth.auth.currentUser.uid,
           name: this.afAuth.auth.currentUser.displayName,
           apptoken: user.apptoken,
-          description:user.description
+          description: user.description,
+          photoLink: user.photoLink
         }
         this.changeUser(info)
         this.key.next(user.apptoken)
@@ -123,7 +128,7 @@ export class FireService {
             if(user.apptoken == info.apptoken){
               found = true
               this.kills.next(user.kills)
-          } 
+          }
           })
           if(!found)
           this.kills.next("0")
@@ -140,7 +145,7 @@ export class FireService {
         })
         })
 
-        
+
       }
       }))
   }
@@ -170,6 +175,14 @@ export class FireService {
  */
   logout(){
     this.afAuth.auth.signOut()
+  }
+
+  updatePhotoLink(photoLink){
+    this.usersCollection.doc(this.afAuth.auth.currentUser.uid).update(
+      {
+        photoLink : photoLink
+      }
+    );
   }
 
 

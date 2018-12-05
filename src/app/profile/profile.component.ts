@@ -49,7 +49,8 @@ export class ProfileComponent implements OnInit {
   uid: any;
   name: any;
   //description: any;
-  subkey:any
+  subkey:any;
+  profilePicture: any;
 
   constructor(private fire: FireService, private afStorage: AngularFireStorage) {}
 
@@ -70,6 +71,7 @@ export class ProfileComponent implements OnInit {
           this.downloadURL = this.ref.getDownloadURL(); // {{ downloadURL | async }}
           this.downloadURL.subscribe(url => {
             this.profileUrl = url; // {{ profileUrl }}
+            this.fire.updatePhotoLink(this.profileUrl);
             console.log(this.profileUrl);
           });
         })
@@ -87,6 +89,7 @@ export class ProfileComponent implements OnInit {
       console.log(this.uid)
     });
     this.fire.currentname.subscribe(name => this.name = name);
+    this.fire.currentPhotoLink.subscribe(profilePicture => this.profilePicture = profilePicture);
     this.fire.currentdescription.subscribe(description => {this.description = description;this.model.editorData = description});
     console.log(this.subkey)
     console.log(this.uid)

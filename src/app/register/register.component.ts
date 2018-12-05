@@ -8,7 +8,7 @@ import * as firebase from 'firebase/app';
 import { AES } from 'crypto-ts';
 import {FormControl, Validators} from '@angular/forms';
 
- 
+
 
 
 @Component({
@@ -20,8 +20,9 @@ export class RegisterComponent implements OnInit {
   // imagePreview: string;
   public Editor = ClassicEditor;
   public isDisabled = true;
-  public description = '<p>My name is Earl. I am fast and write PHP for BCIT schools. here is my loooong story ... . Here is my project screenshot<br>' + 
+  public description = '<p>My name is Earl. I am fast and write PHP for BCIT schools. here is my loooong story ... . Here is my project screenshot<br>' +
     'alt="Earl\'s project" id="imgProj"> </p>';
+  public photoLink = ``;
   public model = {
     editorData: this.description
   };
@@ -71,17 +72,18 @@ this.key = AES.encrypt('message', 'test').toString();
   tryRegister(){
     try{
       this.authService.doRegister({
-        username:this.username, 
+        username:this.username,
         email:this.email,
         password:this.password,
         key:this.key,
-        description:this.description
+        description:this.description,
+        photoLink:this.photoLink
       }).then(res => {
       console.log(res);
       this.errorMessage = "";
       this.successMessage = "Your account has been created";
     })
-   
+
     } catch(e){
       this.errorMessage = e.message
       this.successMessage = ""

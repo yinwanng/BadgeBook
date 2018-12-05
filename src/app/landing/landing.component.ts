@@ -14,7 +14,7 @@ export class LandingComponent implements OnInit {
   private _url = `https://comp4711-a1.herokuapp.com/api`;
   //private _urltank = "http://localhost:3000/api/1.0/login"
   private _urltank = "https://bbtankshooter.herokuapp.com/api/1.0/login";
-  private _urlhangman = "https://comp4711-hangman.herokuapp.com/external.php/";
+  private _urlhangman = "https://comp4711-hangman.herokuapp.com/external.php";
   url2: any;
   token: any;
 

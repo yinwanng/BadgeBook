@@ -698,6 +698,14 @@ Trademarks
 **CKEditor** is a trademark of [CKSource](http://cksource.com) Frederico Knabben. All other brand and product names are trademarks, registered trademarks or service marks of their respective holders.
 
 
+@angular/fire/storage
+MIT
+
+@firebase/storage
+Apache-2.0
+
+firebase/storage
+
 @angular/material/dialog
 
 ngx-window-token
@@ -707,14 +715,6 @@ ngx-clipboard
 MIT
 
 @angular/material/toolbar
-
-@angular/fire/storage
-MIT
-
-@firebase/storage
-Apache-2.0
-
-firebase/storage
 
 @ng-select/ng-select
 MIT

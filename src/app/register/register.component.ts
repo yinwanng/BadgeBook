@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
   public isDisabled = true;
   public description = '<p>My name is Earl. I am fast and write PHP for BCIT schools. here is my loooong story ... . Here is my project screenshot<br>' +
     'alt="Earl\'s project" id="imgProj"> </p>';
-  public photoLink = ``;
+  public photoLink = `https://institutogoldenprana.com.br/wp-content/uploads/2015/08/no-avatar-25359d55aa3c93ab3466622fd2ce712d1.jpg`;
   public model = {
     editorData: this.description
   };

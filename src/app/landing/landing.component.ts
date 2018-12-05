@@ -39,14 +39,11 @@ export class LandingComponent implements OnInit {
   }
 
   goToHangmanGame() {
-    const data = new FormData();
-    data.append(`apptoken`, this.token);
-    data.append(`clientkey`, 'hangman4711');
-    // let myHeaders = {
-    //   apptoken: this.token,
-    //   clientkey: 'hangman4711'
-    // }
-    this.http.post<any>(this._urlhangman, data).subscribe((data:any)=>{
+    const myHeaders = {
+      apptoken: this.token,
+      clientkey: 'hangman4711'
+    }
+    this.http.post<any>(this._urlhangman, myHeaders).subscribe((data:any)=>{
       console.log(data)
       window.open(data.url);
     })

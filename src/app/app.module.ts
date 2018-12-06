@@ -46,6 +46,8 @@ import { environment } from '../environments/environment';
 import { CoreComponent } from './core/core.component';
 import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
+import { ResultComponent } from './result/result.component';
+
 import { TokenDialogComponent } from './token-dialog/token-dialog.component';
 import { ChatComponent } from './chat/chat.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -86,6 +88,7 @@ const routes: Routes = [
     RegisterComponent,
     UserComponent,
     LandingComponent,
+    ResultComponent,
     TokenDialogComponent,
     ChatComponent
   ],
@@ -109,6 +112,9 @@ const routes: Routes = [
     FormsModule,
     NgSelectModule,
     MatInputModule,
+    RouterModule.forRoot([
+      {path:'result',component:ResultComponent}
+    ]),
     MatDialogModule,
     ClipboardModule,
     ReactiveFormsModule,

@@ -3,7 +3,7 @@
 
     <div>
         <button id="btnEditProfilePicture" mat-stroked-button type="button" (click)="filePicker.click()">Edit Profile Image</button>
-        <input type="file" #filePicker (change)="onImagePicked($event)">
+        <input type="file" #filePicker (change)="onImagePicked($event)" accept="image/*">
          <!-- <a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->
         <!-- <img [src]="downloadURL | async" /> -->
     </div>

@@ -38,14 +38,7 @@ export class LandingComponent implements OnInit {
   }
 
   goToHangmanGame() {
-    const myHeaders = {
-      apptoken: this.token,
-      clientkey: "hangman4711"
-    };
-    this.http.post<any>(this._urlhangman, myHeaders).subscribe((data: any) => {
-      console.log(data);
-      window.open(data.url);
-    });
+    window.location.href = this._urlhangman;
   }
 
   goToTankGame() {

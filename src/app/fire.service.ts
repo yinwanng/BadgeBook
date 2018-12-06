@@ -37,6 +37,7 @@ export class FireService {
   private filterInput = new BehaviorSubject<string>(this.filter)
   private apptoken = new BehaviorSubject<string>("")
   users: Observable<any[]>;
+  
   currentkills = this.kills.asObservable();
   currentuid = this.uid.asObservable();
   currentname = this.name.asObservable();
@@ -90,6 +91,7 @@ export class FireService {
         description: user.description,
         photoLink: user.photoLink
     }
+    console.log(this.afAuth.auth.currentUser.uid)
     this.changeUser(info)
     this.getClientsInfo()
     //this.usersCollection.add(info);

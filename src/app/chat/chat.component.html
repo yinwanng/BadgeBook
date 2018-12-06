@@ -3,11 +3,10 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)">
-    <mat-toolbar>Menu</mat-toolbar>
+
+    <mat-toolbar>Chika</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item (click)="sendMessage(user.uid, user.name)" *ngFor= "let user of usersLocal">{{user.name}}</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -22,6 +21,25 @@
       </button>
       <span>badgebook</span>
     </mat-toolbar>
-    <!-- Add Content Here -->
+
+    <!-- Message History -->
+    <mat-list>
+
+        <mat-list-item class="my_conversation" *ngFor= "let msg of chatz">
+          <h2 matLine> {{msg.uid}} </h2>
+          <h5>{{msg.createdAt}}</h5>
+          <p matLine class="demo-2">{{msg.content}}</p>
+        </mat-list-item>
+
+    </mat-list>
+    
+      <mat-card>
+          <mat-form-field class="messageHere">
+              <textarea matInput placeholder="Leave a comment" cols="40" placeholder="text" #Message></textarea>
+            </mat-form-field>
+            <div class="example-button-row">
+                <button mat-raised-button color="accent" (click)="submit(Message.value)">Send</button>
+            </div>
+      </mat-card>
   </mat-sidenav-content>
 </mat-sidenav-container>

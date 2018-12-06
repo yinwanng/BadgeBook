@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
   };
   toggleDisabled() {
     this.isDisabled = !this.isDisabled
+    this.fire.updateDescription(this.description);
     console.log(this.description);
   }
   public onChange( { editor }: ChangeEvent ) {

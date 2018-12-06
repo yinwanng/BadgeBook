@@ -11,7 +11,7 @@ import { TokenDialogComponent } from "../token-dialog/token-dialog.component";
   styleUrls: ["./landing.component.css"]
 })
 export class LandingComponent implements OnInit {
-  private _url = `https://comp4711-a1.herokuapp.com/api`;
+  private _url = "https://comp4711-a1.herokuapp.com/api/";
   //private _urltank = "http://localhost:3000/api/1.0/login"
   private _urltank = "https://bbtankshooter.herokuapp.com/api/1.0/login";
   private _urlhangman = "https://comp4711-hangman.herokuapp.com/external.php";
@@ -62,11 +62,10 @@ export class LandingComponent implements OnInit {
 
   goToVideoChat() {
     let myHeaders = new Headers();
-    myHeaders.append("token", this.token);
+    myHeaders.append("token", "badgebook");
     this.http.post(this._url, myHeaders).subscribe((data: any) => {
       window.location.href = data.url;
     });
-    //window.location.href = `https://comp4711-a1.herokuapp.com/`;
   }
 
   openDialog(): void {

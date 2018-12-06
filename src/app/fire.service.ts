@@ -36,6 +36,7 @@ export class FireService {
   private filterInput = new BehaviorSubject<string>(this.filter)
   private apptoken = new BehaviorSubject<string>("")
   users: Observable<any[]>;
+  
   currentkills = this.kills.asObservable();
   currentuid = this.uid.asObservable();
   currentname = this.name.asObservable();
@@ -86,6 +87,7 @@ export class FireService {
         apptoken: user.key,
         description:user.description
     }
+    console.log(this.afAuth.auth.currentUser.uid)
     this.changeUser(info)
     this.getClientsInfo()
     //this.usersCollection.add(info);
@@ -170,6 +172,10 @@ export class FireService {
  */
   logout(){
     this.afAuth.auth.signOut()
+  }
+
+  getUserSessionInfo() {
+
   }
 
 

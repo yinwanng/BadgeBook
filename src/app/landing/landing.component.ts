@@ -49,7 +49,7 @@ export class LandingComponent implements OnInit {
       .post<any>(this._urltank + "/" + this.token, myHeaders)
       .subscribe((data: any) => {
         console.log(data);
-        window.open(data.url);
+        window.location.href = data.url;
       });
   }
 

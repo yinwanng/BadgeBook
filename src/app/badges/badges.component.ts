@@ -31,5 +31,8 @@ export class BadgesComponent implements OnInit {
     window.location.href =
      this._urlhangman + `?clientkey=hangman4711&apptoken=` + this.token;
   }
+  goToTankGame(){
+    window.location.href='https://bbtankshooter.herokuapp.com/'
+  }
 
 }

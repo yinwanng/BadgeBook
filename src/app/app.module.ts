@@ -12,7 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 
-import {MatButtonModule, MatToolbarModule, MatSidenavModule, MatListModule, MatTableModule} from '@angular/material';
+
+import {MatButtonModule, MatDividerModule, MatToolbarModule, MatSidenavModule, MatListModule, MatTableModule, MatFormFieldModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
@@ -73,6 +74,10 @@ const routes: Routes = [
   {
     path:"chat",
     component:ChatComponent
+  },
+  { 
+    path: "chats/:id", 
+    component: ChatComponent 
   }
 ];
 
@@ -104,9 +109,12 @@ const routes: Routes = [
     HttpClientModule,
     MatButtonModule,
     FormsModule,
+    MatFormFieldModule,
     MatToolbarModule,
     MatCardModule,
     MatIconModule,
+    MatListModule,
+    MatDividerModule,
     MatBadgeModule,
     MatTableModule,
     FormsModule,

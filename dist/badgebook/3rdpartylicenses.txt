@@ -706,6 +706,14 @@ Apache-2.0
 
 firebase/storage
 
+@angular/material/sidenav
+
+@angular/material/toolbar
+
+@angular/material/core
+
+@angular/material/list
+
 @angular/material/dialog
 
 ngx-window-token
@@ -713,8 +721,6 @@ MIT
 
 ngx-clipboard
 MIT
-
-@angular/material/toolbar
 
 @ng-select/ng-select
 MIT

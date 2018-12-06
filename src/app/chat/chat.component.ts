@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { FireService } from '../fire.service';
+import { Component } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  styleUrls: ['./chat.component.css'],
 })
-export class ChatComponent implements OnInit {
-  users:any;
+export class ChatComponent {
 
-  constructor(private afs:FireService) { }
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches)
+    );
 
-  ngOnInit() {
-    this.afs.users.subscribe(users=>this.users = users)
-  }
+  constructor(private breakpointObserver: BreakpointObserver) {}
+
 }

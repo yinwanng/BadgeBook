@@ -4,8 +4,10 @@
     <div>
         <button id="btnEditProfilePicture" mat-stroked-button type="button" (click)="filePicker.click()">Edit Profile Image</button>
         <input type="file" #filePicker (change)="onImagePicked($event)">
+         <!-- <a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->
+        <!-- <img [src]="downloadURL | async" /> -->
     </div>
-    <img id="profileImg">
+    <img id="profileImg" src={{profilePicture}}>
 </mat-card>
 <br>
 

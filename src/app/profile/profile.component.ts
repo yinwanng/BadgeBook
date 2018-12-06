@@ -4,12 +4,21 @@ import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import { Observable } from 'rxjs';
 import { FireService } from '../fire.service';
 
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  ref: AngularFireStorageReference;
+  task: AngularFireUploadTask;
+  downloadURL: Observable<string>;
+  profileUrl: string;
+
+
   // imagePreview: string;
   public Editor = ClassicEditor;
   public isDisabled = true;
@@ -40,12 +49,34 @@ export class ProfileComponent implements OnInit {
   uid: any;
   name: any;
   //description: any;
-  subkey:any
+  subkey:any;
+  profilePicture: any;
 
-  constructor(private fire: FireService) {}
+  constructor(private fire: FireService, private afStorage: AngularFireStorage) {}
 
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
+
+    this.fire.currentuid.subscribe(uid => {
+      this.ref = this.afStorage.ref(this.uid);
+    });
+
+    this.task = this.ref.put(file);
+    console.log(file);
+
+    // get notified when the download URL is available
+    this.task.snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = this.ref.getDownloadURL(); // {{ downloadURL | async }}
+          this.downloadURL.subscribe(url => {
+            this.profileUrl = url; // {{ profileUrl }}
+            this.fire.updatePhotoLink(this.profileUrl);
+            console.log(this.profileUrl);
+          });
+        })
+      )
+      .subscribe();
     console.log(file);
   }
 
@@ -58,11 +89,12 @@ export class ProfileComponent implements OnInit {
       console.log(this.uid)
     });
     this.fire.currentname.subscribe(name => this.name = name);
+    this.fire.currentPhotoLink.subscribe(profilePicture => this.profilePicture = profilePicture);
     this.fire.currentdescription.subscribe(description => {this.description = description;this.model.editorData = description});
     console.log(this.subkey)
     console.log(this.uid)
 
-    
+
   }
   foo(){
     //this.fire.getClientsInfo("asaldivar18")

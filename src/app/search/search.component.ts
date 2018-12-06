@@ -32,11 +32,11 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fire.currentResults.subscribe(results=>{this.results = results; console.log(this.results)})
+    /*this.fire.currentResults.subscribe(results=>{this.results = results; console.log(this.results)})
     this.fire.currentFilter.subscribe(filter=>this.filter = filter);
     this.fire.currentkills.subscribe(a=>{this.kills=a;console.log(this.kills)})
     this.fire.currenthscore.subscribe(a=>{this.hscore=a;console.log(this.hscore)})
-    this.fire.currenthpercentile.subscribe(a=>this.hpercent=a)
+    this.fire.currenthpercentile.subscribe(a=>this.hpercent=a)*/
   }
 
 }

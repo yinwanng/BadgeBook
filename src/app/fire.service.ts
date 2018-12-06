@@ -20,7 +20,7 @@ export class FireService {
   //apptoken:string;
   filterResult: any[] = []
   filter:any;
-
+  public NameListSize = 0;
 
   /**
    *
@@ -33,7 +33,7 @@ export class FireService {
   private key = new BehaviorSubject<string>("");
   private hscore = new BehaviorSubject<string>("");
   private hpercentile = new BehaviorSubject<string>("")
-  private results = new BehaviorSubject<any[]>(this.filterResult);
+  public results = new BehaviorSubject<any[]>(this.filterResult);
   private filterInput = new BehaviorSubject<string>(this.filter)
   private apptoken = new BehaviorSubject<string>("")
   users: Observable<any[]>;
@@ -50,14 +50,15 @@ export class FireService {
   currentToken = this.apptoken.asObservable();
 
 
+  public Firebase 
 
-
-  constructor(private db: AngularFirestore,
+  constructor(public db: AngularFirestore,
               private afAuth: AngularFireAuth,
               private http:HttpClient,
               private router:Router) {
    this.usersCollection = db.collection('users');
    this.users = db.collection('users').valueChanges();
+   this.Firebase = db.collection('users').valueChanges();
    //afAuth.
   }
 /**
@@ -155,20 +156,36 @@ export class FireService {
    * @param input query
    */
   SearchUser(input){
+    // Clear List
+    this.users = this.Firebase;
+    this.filter = []
+    this.filterResult = []
+    this.results = new BehaviorSubject<any[]>(this.filterResult);
+    this.filterInput = new BehaviorSubject<string>(this.filter)
+
     this.filterInput.next(input);
     this.users.subscribe(UsersCollection=>{
         UsersCollection.forEach(user=>{
                 let desc = user.description
                 let name = user.name
-                if (desc.includes(input)){
-                  this.filterResult.push(user)
-                } else if (name.includes(input)){
-                  this.filterResult.push(user)
+                // Searching the Description string for search text match, if false, then searches for name.
+                // if (desc.includes(input)){
+                //   this.filterResult.push(user)
+                //   this.NameListSize = this.NameListSize + 1
+                // } 
+                if (name.includes(input))
+                {
+                  this.filterResult.push(user);
+                  this.NameListSize = this.NameListSize + 1
+                  console.log(user.name)
                 }
-          })
-          this.results.next(this.filterResult)
-        });
-        this.router.navigate(['search']);
+        })
+      this.results.next(this.filterResult)
+      console.log(this.results.value.length)
+      this.router.navigate(['result'])
+    });
+    
+  //this.router.navigate(['search']);
 }
 /**
  * Log out of firebase auth

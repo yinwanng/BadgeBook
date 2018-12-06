@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
 import {FireService} from '../fire.service'
+import {Router} from '@angular/router'
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
@@ -16,19 +16,30 @@ import {FireService} from '../fire.service'
 })
   
 export class ResultComponent implements OnInit {
-  public NameList : String[];
-  constructor(private afs : FireService) 
+  public NameList = new Array<String>();
+  constructor(public afs : FireService,
+              public router:Router) 
   {
+    console.log("Result Array")
+
+    for(let i = 0; i < afs.NameListSize; ++i)
+    {
+      this.NameList.push(afs.results.value[i].name)
+      console.log(afs.results.value[i])
+    }
+
     //afs.collection('people', ref => ref.where('name', '==', 'jeff') )
   }
 
   ngOnInit() {
+
+    
     //let user = this.db.doc('/users/name');
-    //console.log(user);
+    console.log("ngOnInit");
     //this.NameList = this.afs.GetNameList();
     for(let i = 0 ; i < this.NameList.length; ++i)
     {
-      this.createOneCart(this.NameList[i]);
+      this.createOneCart(this.NameList[i], this.afs.results.value[i].uid);
     }
     //this.createOneCart(this.fire.SearchUser("Joseph", null));
     //this.createOneCart("Tim");
@@ -36,7 +47,7 @@ export class ResultComponent implements OnInit {
     //this.createOneCart("Adiran");
 
   }
-  createOneCart(name){
+  createOneCart(name,uid){
     let container = document.getElementById("topLayer");
     let card = document.createElement("div");
     let card_header = document.createElement("div");
@@ -56,6 +67,7 @@ export class ResultComponent implements OnInit {
     row.setAttribute('class',"row");
     col.setAttribute('class',"col");
     image_center.setAttribute('class',"text-center");
+
     //image
     image.setAttribute('src',"../../assets/img/johnny.jpeg");
     image.setAttribute('style',"border-radius:50%;width:100%;");
@@ -67,7 +79,7 @@ export class ResultComponent implements OnInit {
     //p.setAttribute('id',"");
     a.textContent = "Check Him Out";
     //link to that user page
-    a.setAttribute('href', "http://www.bcit.ca");
+    a.setAttribute('href', "/profile#" + uid);
     a.setAttribute('class', "btn btn-primary");
     //a.setAttribute('id',"");
 

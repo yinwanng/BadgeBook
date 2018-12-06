@@ -6,6 +6,7 @@ import { FireService } from '../fire.service';
 
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +18,7 @@ export class ProfileComponent implements OnInit {
   task: AngularFireUploadTask;
   downloadURL: Observable<string>;
   profileUrl: string;
-
+  public href: string = "";
 
   // imagePreview: string;
   public Editor = ClassicEditor;
@@ -52,7 +53,7 @@ export class ProfileComponent implements OnInit {
   subkey:any;
   profilePicture: any;
 
-  constructor(private fire: FireService, private afStorage: AngularFireStorage) {}
+  constructor(private fire: FireService, private afStorage: AngularFireStorage, public router:Router) {}
 
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
@@ -80,22 +81,35 @@ export class ProfileComponent implements OnInit {
     console.log(file);
   }
 
+  private CurrentProfileUID : string = "";
+
   ngOnInit() {
-    this.fire.getClientsInfo()
-    this.fire.currentkey.subscribe(key=> this.subkey = key);
-    this.fire.currentuid.subscribe(uid => {
-      this.uid = uid
-      console.log(this.uid)
-    });
-    this.fire.currentname.subscribe(name => this.name = name);
-    this.fire.currentPhotoLink.subscribe(profilePicture => this.profilePicture = profilePicture);
-    this.fire.currentdescription.subscribe(description => {this.description = description;this.model.editorData = description});
-    console.log(this.subkey)
-    console.log(this.uid)
 
+    this.href = this.router.url;
+    this.CurrentProfileUID = this.GetUIDFromURL(this.href);
 
+    this.fire.Firebase.subscribe(UsersCollection=> 
+      { 
+        UsersCollection.forEach(user=>
+          {
+            if(user.uid.includes(this.CurrentProfileUID))
+              {
+                this.name = user.name
+                this.profilePicture = user.profilePicture
+                this.description = user.description
+                this.model.editorData = user.description
+              }
+          })
+      })
   }
   foo(){
     //this.fire.getClientsInfo("asaldivar18")
   }
+
+  GetUIDFromURL(href : String) : string
+  {
+    // returns the second half of the split which is the UID ie ([/profile][uid])
+      return href.split("#")[1]
+  }
+
 }

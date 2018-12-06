@@ -28,12 +28,7 @@ export class HeaderComponent implements OnInit {
 
   SearchUser(input)
   {
-    //console.log("ok")
+    console.log("ok")
     this.afs.SearchUser(input);
   }
-  SearchUser()
-  {
-    this.afs.SearchUser();
-  }
-
 }

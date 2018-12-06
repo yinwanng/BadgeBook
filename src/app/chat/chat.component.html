@@ -3,6 +3,7 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)">
+
     <mat-toolbar>Chika</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item (click)="sendMessage(user.uid, user.name)" *ngFor= "let user of usersLocal">{{user.name}}</a>
@@ -20,6 +21,7 @@
       </button>
       <span>badgebook</span>
     </mat-toolbar>
+
     <!-- Message History -->
     <mat-list>
 
@@ -39,6 +41,5 @@
                 <button mat-raised-button color="accent" (click)="submit(Message.value)">Send</button>
             </div>
       </mat-card>
-    
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -15,6 +15,7 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
 })
+
 export class ChatComponent implements OnInit {
   chat$: Observable<any>;
   errorMessage: Observable<any>

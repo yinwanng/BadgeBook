@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 
+
 import {MatButtonModule, MatDividerModule, MatToolbarModule, MatSidenavModule, MatListModule, MatTableModule, MatFormFieldModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
@@ -74,8 +75,10 @@ const routes: Routes = [
     path:"chat",
     component:ChatComponent
   },
-  { path: "chats/:id", 
-    component: ChatComponent }
+  { 
+    path: "chats/:id", 
+    component: ChatComponent 
+  }
 ];
 
 @NgModule({

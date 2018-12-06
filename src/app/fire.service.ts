@@ -187,5 +187,9 @@ export class FireService {
     );
   }
 
+  updateDescription(description){
+    this.usersCollection.doc(this.afAuth.auth.currentUser.uid).update({ description: description });
+  }
+
 
 }

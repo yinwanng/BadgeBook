@@ -9,7 +9,8 @@ export class BadgesComponent implements OnInit {
   kills:any
   hscore:any
   hpercent:any
-
+  private _urlhangman = "https://comp4711-hangman.herokuapp.com/external.php";
+  token: any;
   constructor(private afs:FireService) { }
 
   ngOnInit() {
@@ -20,10 +21,18 @@ export class BadgesComponent implements OnInit {
     this.afs.currenthscore.subscribe(a=>{this.hscore=a})
     this.afs.currenthpercentile.subscribe(a=>this.hpercent=a)
     this.afs.getClientsInfo()
+    this.afs.currentkey.subscribe(token => {
+      this.token = token;
+      console.log(this.token);
+    });
   }
 
   goToHangmanGame() {
-    window.location.href = `https://comp4711-hangman.herokuapp.com/`;
+    window.location.href =
+     this._urlhangman + `?clientkey=hangman4711&apptoken=` + this.token;
+  }
+  goToTankGame(){
+    window.location.href='https://bbtankshooter.herokuapp.com/'
   }
 
 }

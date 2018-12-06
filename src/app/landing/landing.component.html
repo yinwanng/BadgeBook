@@ -1,8 +1,5 @@
 <div *ngIf="afAuth.user | async as user; else showLogin">
-    <mat-card>
-        <mat-card-title>Your Subscription token</mat-card-title>
-        <button mat-raised-button (click)="openDialog()">Open token</button>
-    </mat-card>
+
     <br><br>
 
     <app-badges></app-badges>
@@ -49,19 +46,20 @@
                 </div>
                 <div class="mdc-layout-grid__cell">
                     <p>
-                        <img src="../../assets/img/tank-icon.png" class="badgeIcon" (click)="goToTankGame()">
-                        <span matBadgeOverlap="false">Tank Game</span>
+                        <input type="image" src="../../assets/img/tank-icon.png" name="saveForm" class="btTxt submit" id="saveForm" class="badgeIcon" (click)="goToTankGame()" />
+                        <span matBadgeOverlap="false ">Tank Game</span>
+
                     </p>
                 </div>
-                <div class="mdc-layout-grid__cell">
+                <div class="mdc-layout-grid__cell ">
                     <p>
-                        <img src="../../assets/img/videocam-icon.jpg" class="badgeIcon" (click)="goToVideoChat()">
-                        <span matBadgeOverlap="false">Video Chat</span>
+                        <img src="../../assets/img/videocam-icon.jpg " class="badgeIcon " (click)="goToVideoChat() ">
+                        <span matBadgeOverlap="false ">Video Chat</span>
                     </p>
                 </div>
             </div>
         </div>
-        <button mat-button routerLink="login" id="loginButton">Login to BadgeBook</button>
+        <button mat-button color="primary" routerLink="login" id="loginButton ">Login to BadgeBook</button>
 
     </mat-card>
 </ng-template>

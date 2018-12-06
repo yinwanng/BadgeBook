@@ -30,6 +30,7 @@ export class ChatService {
       );
   }
 
+  //create chat message count of bb user
   async create() {
     const { uid } = await this.auth.getUser();
     console.log('uid at async create {chatservice}' + uid)
@@ -45,23 +46,31 @@ export class ChatService {
     return this.router.navigate(['chats', docRef.id]);
   }
 
+  //sends message to recipient under recipient's document id on chats collection
   async sendMessage(chatId, content) {
     const { uid } = await this.auth.getUser();
+    const name = await this.afs.collection('users').doc(uid).get();
+    console.log(name)
 
     const data = {
+
       uid,
       content,
       createdAt: Date.now()
     };
 
     if (uid) {
+      console.log(chatId)
+      console.log(uid)
+      console.log(data)
       const ref = this.afs.collection('chats').doc(chatId);
-      return ref.update({
+      return ref.set({
         messages: firestore.FieldValue.arrayUnion(data)
-      });
+      }, {merge: true});
     }
   }
 
+  //Retrieves user ids and combines messages sent to each other
   joinUsers(chat$: Observable<any>) {
     let chat;
     const joinKeys = {};

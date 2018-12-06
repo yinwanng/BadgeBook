@@ -5,9 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AngularFirestore,AngularFirestoreCollection  } from '@angular/fire/firestore';
+import { AngularFirestore,AngularFirestoreCollection, AngularFirestoreDocument  } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FireService } from '../fire.service';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-chat',
@@ -19,6 +20,14 @@ export class ChatComponent implements OnInit {
   errorMessage: Observable<any>
   newMsg: string;
   userId:any
+  myId:any
+  user:any
+  forWhom:string;
+  usersLocal:any[]=[]
+  chatCollection:AngularFirestoreDocument
+  chats:Observable<any>
+  chatz:any[]=[]
+  //checks width to show/hide side Users nav bar.
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -26,24 +35,67 @@ export class ChatComponent implements OnInit {
 
   constructor(private breakpointObserver: BreakpointObserver,   
             private afAuth: AngularFireAuth,
+            private db: AngularFirestore,
             public cs: ChatService,
             private route: ActivatedRoute,
             public auth: AuthService,
             private fire: FireService
-            ) {}
+            ) {
+    
 
-  ngOnInit() {
-    this.fire.currentuid.subscribe(uid=> {
-        this.userId = uid;
-        console.log(this.userId);
-      })
   }
-    submit(chatId) {
-      this.cs.sendMessage(chatId, this.newMsg);
-      this.newMsg = '';
-    }
+
+  //puts uid and loads BadgeBook users into SideNavBar
+  async ngOnInit() {
+    this.fire.currentuid.subscribe(uid=> {
+        this.myId = uid;
+        console.log(this.myId);
+    })
+
+    this.fire.users.subscribe ( users=> {
+      users.map( user => {
+        this.usersLocal.push({name: user.name, uid: user.uid})
+      })
+    })
+
+    const { uid } = await this.auth.getUser();
+    const fs = this.db.firestore;
+    fs.settings( {timestampsInSnapshots: true});
+          
+    const col = fs.collection("chats").doc(uid).get().then(
+      snap => {
+
+        this.chatz = snap.data().messages;
+        this.chatz.sort(function(a,b){
+          return a.createdAt - b.createdAt;
+        });
+        this.chatz.forEach( a=> {
+          a.createdAt = a.toISOString()
+        });
+      }
+
+
+    );
+
+  }
+
+  //submit message
+  submit(message) {
+      this.cs.sendMessage(this.userId, message);
+  }
   
-    trackByCreated(i, msg) {
+  //sort messages
+  trackByCreated(i, msg) {
       return msg.createdAt;
   }
+
+  //sets receiver's address.
+  sendMessage(uid, username) {
+    this.userId = uid;
+    this.forWhom = username;
+    const chatId = this.route.snapshot.paramMap.get('id');
+    const source = this.cs.get(chatId);
+    this.chat$ = this.cs.joinUsers(source);
+  }
+
 }

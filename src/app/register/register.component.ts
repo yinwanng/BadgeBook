@@ -6,6 +6,8 @@ import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import {FireService} from '../fire.service'
 import * as firebase from 'firebase/app';
 import { AES } from 'crypto-ts';
+import { Guid } from "guid-typescript";
+
 import {FormControl, Validators} from '@angular/forms';
 
 
@@ -50,7 +52,7 @@ export class RegisterComponent implements OnInit {
   username:String
   email:String
   password:String
-  key:String = AES.encrypt('message', 'test').toString();
+  key:String = Guid.create().toString()
 
   constructor(private authService:FireService) { }
 
@@ -58,7 +60,7 @@ export class RegisterComponent implements OnInit {
 
   }
   newKey(){
-this.key = AES.encrypt('message', 'test').toString();
+this.key = Guid.create().toString()
   }
 
   emailc = new FormControl('', [Validators.required, Validators.email]);
